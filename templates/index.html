@@ -1,0 +1,213 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Home</title>
+  <meta charset="UTF-8" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <!-- Feuilles de style locales -->
+<link rel="stylesheet" href="{% static 'css/uicons-solid-rounded.css' %}">
+<!-- Swiper CSS -->
+  <link rel="stylesheet" href="{% static 'css/uicons-bold-rounded.css' %}">
+  <link rel="stylesheet" href="{% static 'css/uicons-brands.css' %}">
+  <link rel="stylesheet" href="{% static 'css/material-icons.css' %}">
+<link rel="stylesheet" href="{% static 'fonts/font.css' %}">
+
+ 
+ <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/flatpickr.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+<script src="{% static 'js/xlsx.full.min.js' %}"></script>
+  <!-- Scripts locaux -->
+  <script src="{% static 'js/chart.js' %}"></script>
+  <!-- Script Ionicons -->
+
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/flatpickr.js' %}"></script>
+  <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</head>
+
+<body id="body-pd" class="body1">
+
+  <div class="l-navbar" id="navbar">
+    <nav class="nav">
+      <div class="nav__brand">
+        <a href="#" class="nav__logo">
+          <img src="{% static 'img/logo.png' %}" alt="Votre Logo" class="logo" id="nav-toggle">
+          <span class="nav__text">Dash d'Or</span>
+        </a>
+      </div>
+    <div class="nav__list">
+    <a href="/index" class="nav__link active">
+      <i class="material-icons nav__icon">home</i>
+      <span class="nav__name">Dashboard</span>
+    </a>
+  </div>
+
+  <a href="{% url 'logout' %}" class="nav__link">
+    <i class="material-icons nav__icon">logout</i>
+    <span class="nav__name">Log Out</span>
+  </a>
+ </nav>
+  </div>
+  <script src="{% static 'js/script.js' %}"></script>
+
+  <section class="home-section">
+  <div class="home-content">
+    <button class="custom-button show-mme active" id="mmeBtn">MME OMEA</button>
+    <button class="custom-button show-int" id="intBtn">MME INT</button>
+    <button class="custom-button show-global" id="globalBtn">MME Global</button>
+    <button class="custom-button show-epg" id="epgBtn">EPG</button>
+    <button class="custom-button show-apn" id="apnBtn">APN</button>
+
+      <span class="vertical-line"></span>
+      
+
+      <div class="containerheader">
+        <select class="custom-input custom-select">
+          {% if section == "int" %}
+            <option value="Int" class="custom-button">All</option>
+            <option value="Allaverage" class="custom-button">All Average</option>
+          {% elif section == "global" %}
+            <option value="TN1global" class="custom-button">TN1</option>
+            <option value="TN2global" class="custom-button">TN2</option>
+            <option value="Sousseglobal" class="custom-button">Sousse</option>
+            <option value="global" class="custom-button">Global</option>
+            {% elif section == "epg" %}
+            <option value="TN1epg" class="custom-button">TN1</option>
+            <option value="TN2epg" class="custom-button">TN2</option>
+            <option value="TN2vepg" class="custom-button">TN2 VEPG</option>
+            <option value="Sousseepg" class="custom-button">Sousse</option>
+            {% elif section == "apn" %}
+            <option value="TN1apn" class="custom-button">TN1</option>
+            <option value="TN2apn" class="custom-button">TN2</option>
+            <option value="SOapn" class="custom-button">Sousse</option>
+            <option value="TN2vEPGapn" class="custom-button">TN2 vEPG</option>
+            <option value="Allapn" class="custom-button">All</option>
+            {% else %}
+            <option value="TN1" class="custom-button">TN1</option>
+            <option value="TN2" class="custom-button">TN2</option>
+            <option value="Sousse" class="custom-button">Sousse</option>
+            <option value="All" class="custom-button">All</option>
+
+          {% endif %}
+        </select>
+
+        
+        <input type="text" id="dateRangePicker" class="custom-input" placeholder="Select Date" />
+        <button class="custom-button" id="goBtn">Go</button>
+        
+      </div>
+    </div>
+  </section>
+
+  
+  <div id="content">
+    {% include 'MMEomea.html' %}
+  </div>
+
+
+  <script>
+
+    
+    $(document).ready(function() {
+
+      $('#mmeContainer').show();
+      $('#tn1_table').show();
+
+      $('#intContainer').hide();
+      $('#globalContainer').hide();
+      $('#epgContainer').hide();
+
+      function handleButtonClick(buttonId, containerToShow, contentUrl, selectOptions) {
+        $(buttonId).click(function(e) {
+          e.preventDefault();
+          $('#content').load(contentUrl);
+          $(containerToShow).show();
+          $('#mmeContainer, #intContainer, #globalContainer, #epgContainer').not(containerToShow).hide();
+          $('.charts-containerint, .charts-containeromea').hide();
+          $('.charts-section').hide();
+          $('.custom-select').html(selectOptions);
+    
+          // Remove active class from all buttons
+          $('.custom-button').removeClass('active');
+          
+          // Add active class to the clicked button
+          $(this).addClass('active');
+        });
+      }
+    
+      // Handle clicks for each button
+      handleButtonClick('#mmeBtn', '#mmeContainer', '{% url "mme" %}', `
+        <option value="TN1" class="custom-button">TN1</option>
+        <option value="TN2" class="custom-button">TN2</option>
+        <option value="Sousse" class="custom-button">Sousse</option>
+        <option value="All" class="custom-button">All</option>
+      `);
+    
+      handleButtonClick('#intBtn', '#intContainer', '{% url "int" %}', `
+        <option value="Int" class="custom-button">All</option>
+        <option value="Allaverage" class="custom-button">All Average</option>
+      `);
+    
+      handleButtonClick('#globalBtn', '#globalContainer', '{% url "global" %}', `
+        <option value="TN1global" class="custom-button">TN1</option>
+        <option value="TN2global" class="custom-button">TN2</option>
+        <option value="Sousseglobal" class="custom-button">Sousse</option>
+        <option value="global" class="custom-button">Global</option>
+      `);
+    
+      handleButtonClick('#epgBtn', '#epgContainer', '{% url "epg" %}', `
+        <option value="TN1epg" class="custom-button">TN1</option>
+        <option value="TN2epg" class="custom-button">TN2</option>
+        <option value="TN2vepg" class="custom-button">TN2 VEPG</option>
+        <option value="Sousseepg" class="custom-button">Sousse</option>
+      `);
+      
+
+      handleButtonClick("#apnBtn", "#apnContainer", "{% url "apn" %}", `
+        <option value="TN1apn" class="custom-button">TN1</option>
+        <option value="TN2apn" class="custom-button">TN2</option>
+        <option value="SOapn" class="custom-button">Sousse</option>
+        <option value="TN2vEPGapn" class="custom-button">TN2 vEPG</option>
+        <option value="Allapn" class="custom-button">All</option>
+
+      `);
+
+
+
+    });    
+    const showMenu = (toggleId, navbarId, bodyId)=>{
+      const toggle = document.getElementById(toggleId),
+      navbar = document.getElementById(navbarId),
+      bodypadding = document.getElementById(bodyId)
+    
+      if(toggle && navbar){
+        toggle.addEventListener('click', ()=>{
+          navbar.classList.toggle('expander')
+    
+          bodypadding.classList.toggle('body-pd')
+        })
+      }
+    }
+    showMenu('nav-toggle','navbar','body-pd')
+    
+
+    
+
+  
+  
+  </script>
+
+
+</body>
+
+</html>

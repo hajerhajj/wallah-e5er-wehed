@@ -1,0 +1,714 @@
+<section id="epgContainer" class="home-section epg-section">
+    <div id="epg" class="container">
+    
+        <div id="tn1epg_table" class="table-section" style="display: none;">
+        <button id="downloadBtntn1epg" class="custom-button containerheader">
+        <i class="fas fa-download"></i>&nbsp; Download report
+      </button>
+            <table class="table table-bordered table-striped" border="1">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Average CPU gc-0/16/1 (%)</th>
+                        <th>Peak CPU gc-0/16/1 (%)</th>
+                        <th>Average CPU gc-0/4/1 (%)</th>
+                        <th>Peak CPU gc-0/4/1 (%)</th>
+                        <th>Average CPU gc-0/5/1 (%)</th>
+                        <th>Peak CPU gc-0/5/1 (%)</th>
+                        <th>Average CPU gc-0/14/1 (%)</th>
+                        <th>Peak CPU gc-0/14/1 (%)</th>
+                        <th>Average CPU gc-0/15/1 (%)</th>
+                        <th>Peak CPU gc-0/15/1 (%)</th>
+                        <th>Average CPU gc-0/17/1 (%)</th>
+                        <th>Peak CPU gc-0/17/1 (%)</th>
+                        <th>Average CPU gc-0/6/1 (%)</th>
+                        <th>Peak CPU gc-0/6/1 (%)</th>
+                        <th>Active PDP context</th>
+                        <th>Active EPS Bearers</th>
+                        <th>Active Subscribers</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in tn1epg_data %}
+                    <tr>
+                        <td>{{ item.date }}</td>
+                        <td>{{ item.avg16 }}</td>
+                        <td>{{ item.peak16 }}</td>
+                        <td>{{ item.avg4 }}</td>
+                        <td>{{ item.peak4 }}</td>
+                        <td>{{ item.avg5 }}</td>
+                        <td>{{ item.peak5 }}</td>
+                        <td>{{ item.avg14 }}</td>
+                        <td>{{ item.peak14 }}</td>
+                        <td>{{ item.avg15 }}</td>
+                        <td>{{ item.peak15 }}</td>
+                        <td>{{ item.avg17 }}</td>
+                        <td>{{ item.peak17 }}</td>
+                        <td>{{ item.avg6 }}</td>
+                        <td>{{ item.peak6 }}</td>
+                        <td>{{ item.actpdpcont }}</td>
+                        <td>{{ item.acteps }}</td>
+                        <td>{{ item.actsub }}</td>
+  
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+         <div id="tn2epg_table" class="table-section" style="display: none;">
+         <button id="downloadBtntn2epg" class="custom-button containerheader">
+        <i class="fas fa-download"></i>&nbsp; Download report
+      </button>
+            <table class="table table-bordered table-striped" border="1">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Average CPU gc-0/16/1 (%)</th>
+                        <th>Peak CPU gc-0/16/1 (%)</th>
+                        <th>Average CPU gc-0/5/1 (%)</th>
+                        <th>Peak CPU gc-0/5/1 (%)</th>
+                        <th>Average CPU gc-0/6/1 (%)</th>
+                        <th>Peak CPU gc-0/6/1 (%)</th>
+                        <th>Average CPU gc-0/11/1 (%)</th>
+                        <th>Peak CPU gc-0/11/1 (%)</th>
+                        <th>Average CPU gc-0/12/1 (%)</th>
+                        <th>Peak CPU gc-0/12/1 (%)</th>
+                        <th>Average CPU gc-0/13/1 (%)</th>
+                        <th>Peak CPU gc-0/13/1 (%)</th>
+                        <th>Average CPU gc-0/15/1 (%)</th>
+                        <th>Peak CPU gc-0/15/1 (%)</th>
+                        <th>Average CPU gc-0/17/1 (%)</th>
+                        <th>Peak CPU gc-0/17/1 (%)</th>
+                        <th>Average CPU gc-0/18/1 (%)</th>
+                        <th>Peak CPU gc-0/18/1 (%)</th>
+                        <th>Average CPU gc-0/19/1 (%)</th>
+                        <th>Peak CPU gc-0/19/1 (%)</th>
+                        <th>Average CPU gc-0/2/1 (%)</th>
+                        <th>Peak CPU gc-0/2/1 (%)</th>
+                        <th>Average CPU gc-0/20/1 (%)</th>
+                        <th>Peak CPU gc-0/20/1 (%)</th>
+                        <th>Average CPU gc-0/3/1 (%)</th>
+                        <th>Peak CPU gc-0/3/1 (%)</th>
+                        <th>Average CPU gc-0/4/1 (%)</th>
+                        <th>Peak CPU gc-0/4/1 (%)</th>
+                        <th>Average CPU gc-0/8/1 (%)</th>
+                        <th>Peak CPU gc-0/8/1 (%)</th>
+                        <th>Average CPU gc-0/9/1 (%)</th>
+                        <th>Peak CPU gc-0/9/1 (%)</th>
+                        <th>Active PDP context</th>
+                        <th>Active EPS Bearers</th>
+                        <th>Active Subscribers</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in tn2epg_data %}
+                    <tr>
+                        <td>{{ item.date }}</td>
+                        <td>{{ item.avg16 }}</td>
+                        <td>{{ item.peak16 }}</td>
+                        <td>{{ item.avg5 }}</td>
+                        <td>{{ item.peak5 }}</td>
+                        <td>{{ item.avg6 }}</td>
+                        <td>{{ item.peak6 }}</td>
+                        <td>{{ item.avg11 }}</td>
+                        <td>{{ item.peak11 }}</td>
+                        <td>{{ item.avg12 }}</td>
+                        <td>{{ item.peak12 }}</td>
+                        <td>{{ item.avg13 }}</td>
+                        <td>{{ item.peak13 }}</td>
+                        <td>{{ item.avg15 }}</td>
+                        <td>{{ item.peak15 }}</td>
+                        <td>{{ item.avg17 }}</td>
+                        <td>{{ item.peak17 }}</td>
+                        <td>{{ item.avg18 }}</td>
+                        <td>{{ item.peak18 }}</td>
+                        <td>{{ item.avg19 }}</td>
+                        <td>{{ item.peak19 }}</td>
+                        <td>{{ item.avg2 }}</td>
+                        <td>{{ item.peak2 }}</td>
+                        <td>{{ item.avg20 }}</td>
+                        <td>{{ item.peak20 }}</td>
+                        <td>{{ item.avg3 }}</td>
+                        <td>{{ item.peak3 }}</td>
+                        <td>{{ item.avg4 }}</td>
+                        <td>{{ item.peak4 }}</td>
+                        <td>{{ item.avg8 }}</td>
+                        <td>{{ item.peak8 }}</td>
+                        <td>{{ item.avg9 }}</td>
+                        <td>{{ item.peak9 }}</td>
+                        <td>{{ item.actpdpcont }}</td>
+                        <td>{{ item.acteps }}</td>
+                        <td>{{ item.actsub }}</td>
+  
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+  
+        <div id="tn2vepg_table" class="table-section" style="display: none;">
+        <button id="downloadBtntn2vepg" class="custom-button containerheader">
+        <i class="fas fa-download"></i>&nbsp; Download report
+      </button>
+            <table class="table table-bordered table-striped" border="1">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Average CPU gc-0/29/1 (%)</th>
+                        <th>Peak CPU gc-0/29/1 (%)</th>
+                        <th>Average CPU gc-0/30/1 (%)</th>
+                        <th>Peak CPU gc-0/30/1 (%)</th>
+                        <th>Average CPU gc-0/1/1 (%)</th>
+                        <th>Peak CPU gc-0/1/1 (%)</th>
+                        <th>Average CPU gc-0/10/1 (%)</th>
+                        <th>Peak CPU gc-0/10/1 (%)</th>
+                        <th>Average CPU gc-0/11/1 (%)</th>
+                        <th>Peak CPU gc-0/11/1 (%)</th>
+                        <th>Average CPU gc-0/12/1 (%)</th>
+                        <th>Peak CPU gc-0/12/1 (%)</th>
+                        <th>Average CPU gc-0/2/1 (%)</th>
+                        <th>Peak CPU gc-0/2/1 (%)</th>
+                        <th>Average CPU gc-0/3/1 (%)</th>
+                        <th>Peak CPU gc-0/3/1 (%)</th>
+                        <th>Average CPU gc-0/4/1 (%)</th>
+                        <th>Peak CPU gc-0/4/1 (%)</th>
+                        <th>Average CPU gc-0/5/1 (%)</th>
+                        <th>Peak CPU gc-0/5/1 (%)</th>
+                        <th>Average CPU gc-0/6/1 (%)</th>
+                        <th>Peak CPU gc-0/6/1 (%)</th>
+                        <th>Average CPU gc-0/7/1 (%)</th>
+                        <th>Peak CPU gc-0/7/1 (%)</th>
+                        <th>Average CPU gc-0/8/1 (%)</th>
+                        <th>Peak CPU gc-0/8/1 (%)</th>
+                        <th>Average CPU gc-0/9/1 (%)</th>
+                        <th>Peak CPU gc-0/9/1 (%)</th>
+                        <th>Active PDP context</th>
+                        <th>Active EPS Bearers</th>
+                        <th>Active Subscribers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in tn2vepg_data %}
+                    <tr>
+                        <td>{{ item.date }}</td>
+                        <td>{{ item.avg29 }}</td>
+                        <td>{{ item.peak29}}</td>
+                        <td>{{ item.avg30}}</td>
+                        <td>{{ item.peak30}}</td>
+                        <td>{{ item.avg1 }}</td>
+                        <td>{{ item.peak1 }}</td>
+                        <td>{{ item.avg10 }}</td>
+                        <td>{{ item.peak10 }}</td>
+                        <td>{{ item.avg11 }}</td>
+                        <td>{{ item.peak11 }}</td>
+                        <td>{{ item.avg12 }}</td>
+                        <td>{{ item.peak12 }}</td>
+                        <td>{{ item.avg2 }}</td>
+                        <td>{{ item.peak2 }}</td>
+                        <td>{{ item.avg3 }}</td>
+                        <td>{{ item.peak3 }}</td>
+                        <td>{{ item.avg4 }}</td>
+                        <td>{{ item.peak4 }}</td>
+                        <td>{{ item.avg5 }}</td>
+                        <td>{{ item.peak5 }}</td>
+                        <td>{{ item.avg6 }}</td>
+                        <td>{{ item.peak6 }}</td>
+                        <td>{{ item.avg7 }}</td>
+                        <td>{{ item.peak7 }}</td>
+                        <td>{{ item.avg8 }}</td>
+                        <td>{{ item.peak8 }}</td>
+                        <td>{{ item.avg9 }}</td>
+                        <td>{{ item.peak9 }}</td>
+                        <td>{{ item.actpdpcont }}</td>
+                        <td>{{ item.acteps }}</td>
+                        <td>{{ item.actsub }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+  
+        <div id="sousseepg_table" class="table-section" style="display: none;">
+        <button id="downloadBtnsoepg" class="custom-button containerheader">
+        <i class="fas fa-download"></i>&nbsp; Download report
+      </button>
+                  <table class="table table-bordered table-striped" border="1">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Average CPU gc-0/29/1 (%)</th>
+                        <th>Peak CPU gc-0/29/1 (%)</th>
+                        <th>Average CPU gc-0/30/1 (%)</th>
+                        <th>Peak CPU gc-0/30/1 (%)</th>
+                        <th>Average CPU gc-0/1/1 (%)</th>
+                        <th>Peak CPU gc-0/1/1 (%)</th>
+                        <th>Average CPU gc-0/2/1 (%)</th>
+                        <th>Peak CPU gc-0/2/1 (%)</th>
+                        <th>Average CPU gc-0/3/1 (%)</th>
+                        <th>Peak CPU gc-0/3/1 (%)</th>
+                        <th>Average CPU gc-0/4/1 (%)</th>
+                        <th>Peak CPU gc-0/4/1 (%)</th>
+                        <th>Average CPU gc-0/5/1 (%)</th>
+                        <th>Peak CPU gc-0/5/1 (%)</th>
+                        <th>Average CPU gc-0/6/1 (%)</th>
+                        <th>Peak CPU gc-0/6/1 (%)</th>
+                        <th>Active PDP context</th>
+                        <th>Active EPS Bearers</th>
+                        <th>Active Subscribers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in soepg_data %}
+                    <tr>
+                        <td>{{ item.date }}</td>
+                        <td>{{ item.avg29 }}</td>
+                        <td>{{ item.peak29}}</td>
+                        <td>{{ item.avg30}}</td>
+                        <td>{{ item.peak30}}</td>
+                        <td>{{ item.avg1 }}</td>
+                        <td>{{ item.peak1 }}</td>
+                        <td>{{ item.avg2 }}</td>
+                        <td>{{ item.peak2 }}</td>
+                        <td>{{ item.avg3 }}</td>
+                        <td>{{ item.peak3 }}</td>
+                        <td>{{ item.avg4 }}</td>
+                        <td>{{ item.peak4 }}</td>
+                        <td>{{ item.avg5 }}</td>
+                        <td>{{ item.peak5 }}</td>
+                        <td>{{ item.avg6 }}</td>
+                        <td>{{ item.peak6 }}</td>
+                        <td>{{ item.actpdpcont }}</td>
+                        <td>{{ item.acteps }}</td>
+                        <td>{{ item.actsub }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="swiper-container" id="tn1epg_chart">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <canvas id="chart1_tn1epg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart2_tn1epg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart3_tn1epg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart4_tn1epg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart5_tn1epg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart6_tn1epg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart7_tn1epg" width="600" height="400" class="chart"></canvas>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <div class="swiper-container" id="tn2vepg_chart">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <canvas id="chart1_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart2_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart3_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart4_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart5_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart6_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart7_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart8_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart9_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart10_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart11_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart12_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart13_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart14_tn2vepg" width="600" height="400" class="chart"></canvas>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <div class="swiper-container" id="sousseepg_chart">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <canvas id="chart1_sousseepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart2_sousseepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart3_sousseepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart4_sousseepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart5_sousseepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart6_sousseepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart7_sousseepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            <div class="swiper-slide">
+                <canvas id="chart8_sousseepg" width="600" height="400" class="chart"></canvas>
+            </div>
+            
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+  
+  <script>
+    $(document).ready(function() {
+        $('.table-section').hide();
+        $('.swiper-container').hide();
+        $('#tn2epg_table').show();
+    
+        var swiper1 = new Swiper('#tn1epg_chart', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    
+        var swiper2 = new Swiper('#tn2vepg_chart', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    
+        var swiper3 = new Swiper('#sousseepg_chart', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    
+    
+    
+    function exportToExcel(tableId) {
+  const table = document.getElementById(tableId);
+  if (!table) {
+    console.error(`Table element with ID '${tableId}' not found.`);
+    return;
+  }
+
+  const rows = table.querySelectorAll('tbody tr');
+  const header = [];
+  table.querySelectorAll('thead th').forEach(th => {
+    header.push(th.textContent.trim());
+  });
+
+  const data = [];
+  data.push(header);
+
+  rows.forEach(row => {
+    if (row.style.display !== 'none') { // Check if the row is visible
+      const rowData = [];
+      row.querySelectorAll('td').forEach(cell => {
+        let cellValue = cell.textContent.trim();
+        if (!isNaN(cellValue)) {
+          cellValue = cellValue.replace('.', ',');
+        }
+        rowData.push(cellValue);
+      });
+      data.push(rowData);
+    }
+  });
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+  XLSX.writeFile(wb, `${tableId}.xlsx`);
+}
+
+    $('#downloadBtntn1epg').click(function(e) {
+      e.preventDefault();
+      exportToExcel('tn1epg_table');
+    });
+    
+    $('#downloadBtntn2epg').click(function(e) {
+      e.preventDefault();
+      exportToExcel('tn2epg_table');
+    });
+    
+    $('#downloadBtntn2vepg').click(function(e) {
+      e.preventDefault();
+      exportToExcel('tn2vepg_table');
+    });
+    
+    $('#downloadBtnsoepg').click(function(e) {
+      e.preventDefault();
+      exportToExcel('sousseepg_table');
+    });
+        
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}.${month}.${day}`;
+        }
+        var charts = {};
+        function generateLineChartPerPeriod(chartId, tableId, avgColumnIndex, peakColumnIndex, chartTitle, startDate, endDate) {
+            var ctx = document.getElementById(chartId).getContext('2d');
+            
+            if (charts[chartId]) {
+                charts[chartId].destroy();
+            }
+            
+            var table = $(tableId);
+            var labels = [];
+            var avgData = [];
+            var peakData = [];
+        
+            table.find('tbody tr').each(function() {
+                var cells = $(this).find('td');
+                var date = new Date(cells.eq(0).text());
+                if (date >= startDate && date <= endDate) {
+                    labels.push(formatDate(date));
+                    avgData.push(parseFloat(cells.eq(avgColumnIndex).text()));
+                    peakData.push(parseFloat(cells.eq(peakColumnIndex).text()));
+                }
+            });
+        
+            console.log('Labels:', labels);
+            console.log('Average Data:', avgData);
+            console.log('Peak Data:', peakData);
+        
+            if (labels.length === 0) {
+                console.warn('No data available for the selected date range.');
+                return;
+            }
+        
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Average',
+                            data: avgData,
+                            borderColor: 'blue',
+                            backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                        },
+                        {
+                            label: 'Peak',
+                            data: peakData,
+                            borderColor: 'red',
+                            backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        
+            charts[chartId] = chart;
+        }
+        
+    
+        function initializeCharts(selectedOption, startDate, endDate) {
+            setTimeout(function() {
+                generateLineChartPerPeriod('chart1_' + selectedOption, '#' + selectedOption + '_table', 1, 2, 'Chart 1', startDate, endDate);
+                generateLineChartPerPeriod('chart2_' + selectedOption, '#' + selectedOption + '_table', 3, 4, 'Chart 1', startDate, endDate);
+                generateLineChartPerPeriod('chart3_' + selectedOption, '#' + selectedOption + '_table', 5, 6, 'Chart 1', startDate, endDate);
+                generateLineChartPerPeriod('chart4_' + selectedOption, '#' + selectedOption + '_table', 7, 8, 'Chart 1', startDate, endDate);
+                generateLineChartPerPeriod('chart5_' + selectedOption, '#' + selectedOption + '_table', 9, 10, 'Chart 1', startDate, endDate);
+                generateLineChartPerPeriod('chart6_' + selectedOption, '#' + selectedOption + '_table', 11, 12, 'Chart 1', startDate, endDate);
+                generateLineChartPerPeriod('chart7_' + selectedOption, '#' + selectedOption + '_table', 13, 14, 'Chart 1', startDate, endDate);
+
+                generateLineChartPerPeriod('chart8_' + selectedOption, '#' + selectedOption + '_table', 15, 16, 'Chart 2', startDate, endDate);
+                generateLineChartPerPeriod('chart9_' + selectedOption, '#' + selectedOption + '_table', 17, 18, 'Chart 2', startDate, endDate);
+                generateLineChartPerPeriod('chart10_' + selectedOption, '#' + selectedOption + '_table', 19, 20, 'Chart 2', startDate, endDate);
+                generateLineChartPerPeriod('chart11_' + selectedOption, '#' + selectedOption + '_table', 21, 22, 'Chart 2', startDate, endDate);
+                generateLineChartPerPeriod('chart12_' + selectedOption, '#' + selectedOption + '_table', 23, 24, 'Chart 2', startDate, endDate);
+                generateLineChartPerPeriod('chart13_' + selectedOption, '#' + selectedOption + '_table', 25, 26, 'Chart 2', startDate, endDate);
+                generateLineChartPerPeriod('chart14_' + selectedOption, '#' + selectedOption + '_table', 27, 28, 'Chart 2', startDate, endDate);
+
+                // Autres graphiques...
+            }, 100); // Ajustez le délai si nécessaire
+        }
+    
+        $('#goBtn').click(function(e) {
+            e.preventDefault();
+    
+            var selectedOption = $('.custom-select').val();
+            var dateRange = $('#dateRangePicker').val().split(' to ');
+    
+            if (dateRange.length !== 2) {
+                alert("Veuillez sélectionner une plage de dates valide.");
+                return;
+            }
+    
+            var startDate = new Date(dateRange[0]);
+            var endDate = new Date(dateRange[1]);
+    
+            $('.swiper-container').hide(); // Hide all swiper containers
+            $('.table-section').hide(); // Hide all table sections
+            $('#' + selectedOption.toLowerCase() + '_table').show(); // Show the selected table section
+            $('#' + selectedOption.toLowerCase() + '_chart').show(); // Show the selected chart section
+
+            initializeCharts(selectedOption.toLowerCase(), startDate, endDate);
+            logMaxValuesInRange('#' + selectedOption.toLowerCase() + '_table', startDate, endDate);
+        });
+    
+            
+                function logMaxValuesInRange(tableId, startDate, endDate) {
+                    // Remove existing max values row if it exists
+                    $(tableId + ' tbody tr.max-values-row').remove();
+                
+                    var maxValues = [];
+                    var headers = $(tableId + ' th');
+                    var numColumns = headers.length;
+                
+                    for (var i = 0; i < numColumns; i++) {
+                        maxValues[i] = -Infinity;
+                    }
+                
+                    // Iterate through each row to find max values within date range
+                    $(tableId + ' tbody tr').each(function() {
+                        var dateText = $(this).find('td:first-child').text().trim();
+                        var rowDate = new Date(dateText.replace(/\./g, '-'));
+                
+                        if (rowDate >= startDate && rowDate <= endDate) {
+                            $(this).find('td').each(function(index) {
+                                var value = parseFloat($(this).text().replace(',', '.'));
+                                if (!isNaN(value)) {
+                                    if (value > maxValues[index]) {
+                                        maxValues[index] = value;
+                                    }
+                                }
+                            });
+                        }
+                    });
+                
+                    // Add a row to the table with the max values
+                    var maxValuesRow = '<tr class="max-values-row">';
+                    maxValuesRow += '<td>Maximum</td>'; // Add "result" in the first column
+                    for (var i = 1; i < maxValues.length; i++) {
+                        maxValuesRow += '<td>' + (isFinite(maxValues[i]) ? maxValues[i] : 'N/A') + '</td>';
+                    }
+                    maxValuesRow += '</tr>';
+                
+                    // Append the max values row to the table body
+                    $(tableId + ' tbody').append(maxValuesRow);
+                }
+                
+        
+            
+            
+                var months = [];
+                var currentDate = new Date();
+                var currentMonth = currentDate.getMonth();
+                var currentYear = currentDate.getFullYear();
+            
+                for (var i = 5; i >= 0; i--) {
+                    var pastMonth = new Date(currentYear, currentMonth - i, 1);
+                    months.push(pastMonth.toLocaleString('default', { month: 'long' }));
+                }
+
+            
+                function updateLineChart(tableId) {
+                    var labels = [];
+                    var avgData = [];
+                    var peakData = [];
+                    
+                    $(tableId + ' tbody tr').each(function() {
+                        var dateText = $(this).find('td:first-child').text().trim();
+                        var date = new Date(dateText.replace(/\./g, '-'));
+                        var avgValue = parseFloat($(this).find('td:nth-child(2)').text().replace(',', '.'));
+                        var peakValue = parseFloat($(this).find('td:nth-child(3)').text().replace(',', '.'));
+            
+                        if (!isNaN(avgValue) && !isNaN(peakValue)) {
+                            labels.push(dateText);
+                            avgData.push(avgValue);
+                            peakData.push(peakValue);
+                        }
+                    });
+            
+                    
+                }
+            });
+        </script>
+

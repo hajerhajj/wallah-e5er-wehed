@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Signup Page</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <form method="post" style="height: 600px; width: 400px;top: 50%; left: 50%;">
+        {% csrf_token %}
+        <div class="form-half">
+            <h3 class="orange-text">Sign Up Here</h3>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            <label for="username" class="orange-text">Username</label>
+            <input type="text" placeholder="Username" name="username" id="username">
+
+            <label for="email" class="orange-text">Email</label>
+            <input type="email" placeholder="Email or Phone" name="email" id="email">
+
+            <label for="password" class="orange-text">Password</label>
+            <input type="password" placeholder="Password" id="password" name="password">
+
+            
+            <button type="submit" class="orange-text">Signup</button>
+
+            <div class="centered-link ">
+                <a href="{% url 'login' %}" class="orange-text">I already have an account</a>
+            </div>
+        </div>
+    </form>
+    <img src="{% static 'img/orange-tunisie.png' %}" class="logo" style="margin-top: 10px"/>
+</body>
+</html>

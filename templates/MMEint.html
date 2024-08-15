@@ -1,0 +1,410 @@
+
+{% load static %}
+<section id="intContainer" class="home-section int-section">
+  <div id="int" class="container">
+    <div id="int_table" class="table-section" style="display: none;">
+      <button id="downloadBtnInt" class="custom-button containerheader">
+        <i class="fas fa-download"></i>&nbsp; Download report
+      </button>     
+      <br><br>
+      <table class="table table-bordered table-striped" border="1">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>PDP Act TN1 (%)</th>
+            <th>PDP ACT TN2 (%)</th>
+            <th>PDP Act Sousse (%)</th>
+            <th>PDP Act Global (%)</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in int_data %}
+          <tr>
+            <td>{{ item.date }}</td>
+            <td>{{ item.bhTN1 }}</td>
+            <td>{{ item.bhTN2 }}</td>
+            <td>{{ item.bhSO }}</td>
+            <td>{{ item.bhGlobal }}</td>          
+           
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div id="allaverage_table" class="table-section" style="display: none;">
+      <button id="downloadBtn" class="custom-button containerheader">Download report</button>
+          <br> <br>
+        <table class="table table-bordered table-striped" border="1">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>PDP ACT TN1 (%)</th>
+              <th>PDP ACT TN2 (%)</th>
+              <th>PDP ACT Sousse (%)</th>
+              <th>PDP ACT Global (%)</th>
+
+            </tr>
+          </thead>
+          <tbody id="allaverage_body">
+          </tbody>
+        </table>
+      </div>
+  </div>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+            <canvas id="chart2" width="600" height="400" class="chart"></canvas>
+      </div>
+      <div class="swiper-slide">
+            <canvas id="chart3" width="600" height="400" class="chart hidden-chart"></canvas>
+      </div>
+      <div class="swiper-slide">
+            <canvas id="chart4" width="600" height="400" class="chart hidden-chart"></canvas>
+      </div>
+      <div class="swiper-slide">
+            <canvas id="chart5" width="600" height="400" class="chart hidden-chart"></canvas>
+      </div>
+      
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- Add Navigation -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+<script>
+
+  
+  $(document).ready(function() {
+
+    function exportToExcel() {
+      const table = document.getElementById('int_table');
+      if (!table) {
+        console.error("Table element with ID 'int_table' not found.");
+        return;
+      }
+  
+      const rows = table.querySelectorAll('tbody tr');
+      const header = [];
+      $('#int_table thead th').each(function() {
+        header.push($(this).text().trim());
+      });
+  
+      const data = [];
+      data.push(header);
+  
+      rows.forEach(row => {
+        if ($(row).is(':visible')) { // Check if the row is visible
+          const rowData = [];
+          row.querySelectorAll('td').forEach(cell => {
+            let cellValue = cell.textContent.trim();
+            if (!isNaN(cellValue)) {
+              cellValue = cellValue.replace('.', ',');
+            }
+            rowData.push(cellValue);
+          });
+          data.push(rowData);
+        }
+      });
+  
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(data);
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  
+      XLSX.writeFile(wb, 'int_table.xlsx');
+    }
+    
+    $('#downloadBtnInt').click(function(e) {
+      e.preventDefault();
+      exportToExcel();
+    });
+
+    $('.table-section').hide();
+    $('#int_table').show();
+    $('.swiper-container').hide();
+    $('.swiper-wrapper').hide();
+    
+    $('#intBtn').click(function(e) {
+      e.preventDefault();
+      $('.table-section').hide(); 
+      $('#int_table').show();
+    });
+
+    flatpickr("#dateRangePicker", {
+      mode: "range",
+      dateFormat: "Y-m-d",
+    });
+
+    
+
+    $('#goBtn').click(function(e) {
+      e.preventDefault();
+  
+      const selectedOption = $('.custom-select').val();
+      const dateRange = $('#dateRangePicker').val();
+  
+      if (!dateRange || !dateRange.includes(' to ')) {
+        alert("Veuillez sélectionner une plage de dates valide.");
+        return;
+      }
+  
+      const dates = dateRange.split(' to ');
+      const startDate = new Date(dates[0]);
+      const endDate = new Date(dates[1]);
+  
+      if (selectedOption === 'Allaverage') {
+        var averageValues = calculateAverageValues(startDate, endDate);
+        $('#allaverage_body').html(`
+          <tr>
+            <td>${startDate.toISOString().split('T')[0]} - ${endDate.toISOString().split('T')[0]}</td>
+            <td>${averageValues.average_bhTN1}</td>
+            <td>${averageValues.average_bhTN2}</td>
+            <td>${averageValues.average_bhSO}</td>  
+            <td>${averageValues.average_bhGlobal}</td>          
+        
+            </tr>
+        `);
+  
+        $('.table-section').hide()
+        $('#allaverage_table').show();
+        $('.swiper-container').show();
+        $('.swiper-wrapper').show();
+    
+      } else {
+        $('.table-section tbody tr').each(function() {
+          var dateText = $(this).find('td:first-child').text().trim();
+          var formattedDateText = dateText.replace(/\./g, '-');
+          var rowDate = new Date(formattedDateText);
+          var rowDateString = rowDate.toISOString().split('T')[0];
+  
+          if (rowDate >= startDate && rowDate <= endDate) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+
+          
+        $('.table-section').hide();
+        $('#' + selectedOption.toLowerCase() + '_table').show();
+        });
+  
+  
+      }
+  
+      
+    });
+
+
+
+    function calculateAverageValues(startDate, endDate) {
+      var sum_bhTN1 = 0, sum_bhTN2 = 0, sum_bhSO = 0,sum_bhGlobal= 0, count = 0;
+  
+      // Parcourir chaque ligne visible dans la table
+      $('.table-section tbody tr').each(function() {
+        var dateText = $(this).find('td:first-child').text().trim();
+        var formattedDateText = dateText.replace(/\./g, '-');
+        var rowDate = new Date(formattedDateText);
+  
+        // Vérifier si la date est dans la plage sélectionnée
+        if (rowDate >= startDate && rowDate <= endDate) {
+          var bhTN1 = parseFloat($(this).find('td:nth-child(2)').text().trim().replace(',', '.'));
+          var bhTN2 = parseFloat($(this).find('td:nth-child(3)').text().trim().replace(',', '.'));
+          var bhSO = parseFloat($(this).find('td:nth-child(4)').text().trim().replace(',', '.'));
+          var bhGlobal = parseFloat($(this).find('td:nth-child(5)').text().trim().replace(',', '.'));
+
+  
+          if (bhTN1 > 90) sum_bhTN1 += bhTN1;
+          if (bhTN2 > 90) sum_bhTN2 += bhTN2;
+          if (bhSO > 90) sum_bhSO += bhSO;
+
+          // Incrémenter le compteur uniquement si toutes les valeurs sont valides
+          if (bhTN1 > 90 || bhTN2 > 90 || bhSO > 90 ) count++;
+        }
+      });
+  
+      // Calculer les moyennes
+      var average_bhTN1 = count > 0 ? (sum_bhTN1 / count).toFixed(2) : 0;
+      var average_bhTN2 = count > 0 ? (sum_bhTN2 / count).toFixed(2) : 0;
+      var average_bhSO = count > 0 ? (sum_bhSO / count).toFixed(2) : 0;
+      var average_bhGlobal = count > 0 ? (sum_bhSO / count).toFixed(2) : 0;
+
+  
+      return {
+        average_bhTN1: average_bhTN1,
+        average_bhTN2: average_bhTN2,
+        average_bhSO: average_bhSO,
+        average_bhGlobal: average_bhGlobal
+      };
+    }
+
+
+    function calculateMonthlyAverages(columnIndex) {
+      var sums = {},
+          counts = {},
+          averages = {};
+    
+      // Get the current date and calculate the start date for the last 7 months
+      var currentDate = new Date();
+      var startDate = new Date();
+      startDate.setMonth(startDate.getMonth() - 6);
+    
+      // Array of month names
+      var monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    
+      // Initialize sums and counts for each of the last 6 months
+      for (var i = 0; i < 6; i++) {
+          var month = new Date(currentDate.getFullYear(), currentDate.getMonth() - i - 1, 1);
+          var monthKey = monthNames[month.getMonth()];
+          sums[monthKey] = 0;
+          counts[monthKey] = 0;
+      }
+    
+      // Parcourir chaque ligne visible dans la table
+      $('.table-section tbody tr').each(function() {
+          var dateText = $(this).find('td:first-child').text().trim();
+          var formattedDateText = dateText.replace(/\./g, '-');
+          var rowDate = new Date(formattedDateText);
+    
+          // Vérifier si la date est dans les 7 derniers mois
+          if (rowDate >= startDate && rowDate <= currentDate) {
+              var cellValue = parseFloat($(this).find('td:nth-child(' + columnIndex + ')').text().trim().replace(',', '.'));
+    
+              // Vérifier si la valeur de la cellule est supérieure à 90
+              if (cellValue > 90) {
+                  var monthKey = monthNames[rowDate.getMonth()];
+                  sums[monthKey] += cellValue;
+                  counts[monthKey]++;
+              }
+          }
+      });
+    
+      // Calculer les moyennes pour chaque mois
+      for (var monthKey in sums) {
+          if (counts[monthKey] > 0) {
+              averages[monthKey] = (sums[monthKey] / counts[monthKey]).toFixed(2);
+          } else {
+              averages[monthKey] = 0;
+          }
+      }
+    
+      // Log the monthly averages
+      console.log("Monthly Averages:", averages);
+    
+      return averages;
+    }
+    
+    // Exemple d'utilisation:
+    var averages = calculateMonthlyAverages(2);  // Calculer les moyennes pour la colonne 2 pour les 7 derniers mois
+    console.log("Monthly Averages Result:", averages);  // Afficher les moyennes calculées
+    
+  //7last month
+  function getMonthName(index) {
+    var months = [
+        "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+        "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+    ];
+    return months[index];
+  }
+
+  function getLast7Months() {
+    var today = new Date();
+    var months = [];
+    for (var i = 1; i < 7; i++) {
+        var month = new Date(today.getFullYear(), today.getMonth() - i, 1);
+        months.push(month);
+    }
+    return months;
+  }
+
+
+  function getLast7MonthsLabels() {
+    return getLast7Months().map(function(month) {
+        return getMonthName(month.getMonth());
+    }).reverse();
+  }
+  
+    // Utilisation    
+    function createChart(ctx, label, data) {
+      return new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: getLast7MonthsLabels(),
+          datasets: [{
+            label: label,
+            data: data,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+    var swiper = new Swiper('.swiper-container', {
+      loop: true,
+      pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+      },
+      navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+      },
+      on: {
+          slideChange: function () {
+          },
+      },
+      initialSlide: 0, 
+  });
+
+
+      
+    // Calculez les moyennes mensuelles pour les différentes colonnes
+    const bhtn1 = calculateMonthlyAverages(2);
+    const bhtn2 = calculateMonthlyAverages(3);
+    const bhso = calculateMonthlyAverages(4);
+    const bhglobal = calculateMonthlyAverages(5);
+    
+    // Créez les graphiques pour chaque ensemble de données
+    createChart(document.getElementById('chart2').getContext('2d'), 'PDP Act TN1', bhtn1);
+    createChart(document.getElementById('chart3').getContext('2d'), 'PDP Act TN2', bhtn2);
+    createChart(document.getElementById('chart4').getContext('2d'), 'PDP ACT Sousse', bhso);
+    createChart(document.getElementById('chart5').getContext('2d'), 'PDP Act Global', bhglobal);
+      });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+	
+

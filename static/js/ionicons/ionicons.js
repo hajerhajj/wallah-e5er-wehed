@@ -1,0 +1,1 @@
+Found. Redirecting to /ionicons@7.4.0/dist/ionicons/ionicons.js

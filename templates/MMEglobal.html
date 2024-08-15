@@ -1,0 +1,440 @@
+{% load static %}
+
+<section id="globalContainer" class="home-section global-section">
+  <div id="global" class="container">
+    <div id="tn1global_table" class="table-section" style="display: none;">
+      <table class="table table-bordered table-striped" border="1">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>SAU 4G</th>
+            <th>Active PDP Number 2G </th>
+            <th>Active PDP Number 3G</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in tn1global_data %}
+          <tr>
+            <td>{{ item.date }}</td>
+            <td>{{ item.sau4g }}</td>
+            <td>{{ item.pdpactnbr2g }}</td>
+            <td>{{ item.pdpactnbr3g }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div id="tn2global_table" class="table-section" style="display: none;">
+      <table class="table table-bordered table-striped" border="1">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>SAU 4G</th>
+            <th>Active PDP Number 2G </th>
+            <th>Active PDP Number 3G</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in tn2global_data %}
+          <tr>
+            <td>{{ item.date }}</td>
+            <td>{{ item.sau4g }}</td>
+            <td>{{ item.pdpactnbr2g }}</td>
+            <td>{{ item.pdpactnbr3g }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div id="sousseglobal_table" class="table-section" style="display: none;">
+      <table class="table table-bordered table-striped" border="1">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>SAU 4G</th>
+            <th>Active PDP Number 2G </th>
+            <th>Active PDP Number 3G</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in sousseglobal_data %}
+          <tr>
+            <td>{{ item.date }}</td>
+            <td>{{ item.sau4g }}</td>
+            <td>{{ item.pdpactnbr2g }}</td>
+            <td>{{ item.pdpactnbr3g }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div id="global_table" class="table-section" style="display: none;">
+        <table class="table table-bordered table-striped" border="1">
+          <thead>
+            <tr>
+                <th>Date</th>
+                <th>SAU 4G</th>
+                <th>Active PDP Number 2G </th>
+                <th>Active PDP Number 3G</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+  </div>
+  
+</section>
+
+<script>
+    $(document).ready(function() {
+        $('.table-section').hide();
+        $('#tn1global_table').show();
+    
+        $('#globalBtn').click(function(e) {
+          e.preventDefault();
+          $('.table-section').hide();
+          $('#tn1global_table').show();
+        });
+    
+        flatpickr("#dateRangePicker", {
+          mode: "range",
+          dateFormat: "Y-m-d",
+        });
+    
+        $('#goBtn').click(function(e) {
+          e.preventDefault();
+          var selectedOption = $('.custom-select').val();
+          var dateRange = $('#dateRangePicker').val().split(' to ');
+    
+          if (dateRange.length !== 2) {
+            alert("Veuillez sélectionner une plage de dates valide.");
+            return;
+          }
+    
+          var startDate = new Date(dateRange[0].replace(/\./g, '-'));
+          var endDate = new Date(dateRange[1].replace(/\./g, '-'));
+    
+          console.log('Date de début sélectionnée:', startDate.toISOString().split('T')[0]);
+          console.log('Date de fin sélectionnée:', endDate.toISOString().split('T')[0]);
+          
+          if (selectedOption === 'global') {
+            var sau4gAvg = calculateSumByDay(startDate, endDate, 2);
+            var pdpact2gAvg = calculateSumByDayColumn2(startDate, endDate, 3);
+            var pdpact3gAvg = calculateSumByDayColumn3(startDate, endDate, 4);
+
+            console.log('Start Date:', startDate.toISOString().split('T')[0]);
+            console.log('End Date:', endDate.toISOString().split('T')[0]);
+            console.log('sau4gAvg:', sau4gAvg.toFixed(2));
+            console.log('sau4gAvg:', pdpact2gAvg.toFixed(2));
+            console.log('sau4gAvg:', pdpact3gAvg.toFixed(2));
+
+            $('#global_table tbody').html(`
+              <tr>
+                <td>${startDate.toISOString().split('T')[0]} - ${endDate.toISOString().split('T')[0]}</td>
+                <td>${sau4gAvg}</td>
+                <td>${pdpact2gAvg}</td>
+                <td>${pdpact3gAvg}</td>
+              </tr>
+            `);
+    
+            $('.table-section').hide();
+            $('#global_table').show();
+    
+          } else {
+            $('.table-section tbody tr').each(function() {
+                var dateText = $(this).find('td:first-child').text().trim();
+                var formattedDateText = dateText.replace(/\./g, '-');
+                var rowDate = new Date(formattedDateText);
+                var rowDateString = rowDate.toISOString().split('T')[0];
+      
+                if (rowDate >= startDate && rowDate <= endDate) {
+                  $(this).show();
+                } else {
+                  $(this).hide();
+                }
+
+                $('.table-section').hide();
+                $('#' + selectedOption.toLowerCase() + '_table').show();
+              });
+      
+              
+      
+          }
+    
+        });
+    
+        
+        
+        function calculateSumByDay(startDate, endDate, columnNumber) {
+            var sums = {};
+      
+            $('#tn1global_table tbody tr').each(function() {
+              var dateText = $(this).find('td:first-child').text().trim();
+              var formattedDateText = dateText.replace(/\./g, '-');
+              var rowDate = new Date(formattedDateText);
+      
+              if (rowDate >= startDate && rowDate <= endDate) {
+                var value = parseFloat($(this).find('td:nth-child(' + columnNumber + ')').text().replace(',', '.'));
+                if (!isNaN(value)) {
+                  var dateKey = rowDate.toISOString().split('T')[0];
+                  sums[dateKey] = (sums[dateKey] || 0) + value;
+                }
+              }
+            });
+      
+            $('#tn2global_table tbody tr').each(function() {
+              var dateText = $(this).find('td:first-child').text().trim();
+              var formattedDateText = dateText.replace(/\./g, '-');
+              var rowDate = new Date(formattedDateText);
+      
+              if (rowDate >= startDate && rowDate <= endDate) {
+                var value = parseFloat($(this).find('td:nth-child(' + columnNumber + ')').text().replace(',', '.'));
+                if (!isNaN(value)) {
+                  var dateKey = rowDate.toISOString().split('T')[0];
+                  sums[dateKey] = (sums[dateKey] || 0) + value;
+                }
+              }
+            });
+      
+            $('#sousseglobal_table tbody tr').each(function() {
+              var dateText = $(this).find('td:first-child').text().trim();
+              var formattedDateText = dateText.replace(/\./g, '-');
+              var rowDate = new Date(formattedDateText);
+      
+              if (rowDate >= startDate && rowDate <= endDate) {
+                var value = parseFloat($(this).find('td:nth-child(' + columnNumber + ')').text().replace(',', '.'));
+                if (!isNaN(value)) {
+                  var dateKey = rowDate.toISOString().split('T')[0];
+                  sums[dateKey] = (sums[dateKey] || 0) + value;
+                }
+              }
+            });
+      
+            var maxSum = 0;
+            var maxDate = null;
+      
+            Object.keys(sums).forEach(function(date) {
+              if (sums[date] > maxSum) {
+                maxSum = sums[date];
+                maxDate = date;
+              }
+            });
+      
+            return maxSum;
+          }
+
+          //column 2
+          function calculateSumByDayColumn2(startDate, endDate, columnNumber) {
+            var sums = {};
+          
+            function processTableRows(tableId) {
+              $(tableId + ' tbody tr').each(function() {
+                var dateText = $(this).find('td:first-child').text().trim();
+                var formattedDateText = dateText.replace(/\./g, '-');
+                var rowDate = new Date(formattedDateText);
+          
+                if (rowDate >= startDate && rowDate <= endDate) {
+                  var value = parseFloat($(this).find('td:nth-child(' + columnNumber + ')').text().replace(',', '.'));
+                  if (!isNaN(value) && value < 17000) {
+                    var dateKey = rowDate.toISOString().split('T')[0];
+                    sums[dateKey] = (sums[dateKey] || 0) + value;
+                  }
+                }
+              });
+            }
+          
+            processTableRows('#tn1global_table');
+            processTableRows('#tn2global_table');
+            processTableRows('#sousseglobal_table');
+          
+            var maxSum = 0;
+            var maxDate = null;
+          
+            Object.keys(sums).forEach(function(date) {
+              if (sums[date] > maxSum) {
+                maxSum = sums[date];
+                maxDate = date;
+              }
+            });
+          
+            return maxSum;
+          }
+
+
+          //column 3
+          function calculateSumByDayColumn3(startDate, endDate, columnNumber) {
+            var sums = {};
+          
+            function processTableRows(tableId) {
+              $(tableId + ' tbody tr').each(function() {
+                var dateText = $(this).find('td:first-child').text().trim();
+                var formattedDateText = dateText.replace(/\./g, '-');
+                var rowDate = new Date(formattedDateText);
+          
+                if (rowDate >= startDate && rowDate <= endDate) {
+                  var value = parseFloat($(this).find('td:nth-child(' + columnNumber + ')').text().replace(',', '.'));
+                  if (!isNaN(value) && value < 70000) {
+                    var dateKey = rowDate.toISOString().split('T')[0];
+                    sums[dateKey] = (sums[dateKey] || 0) + value;
+                  }
+                }
+              });
+            }
+          
+            processTableRows('#tn1global_table');
+            processTableRows('#tn2global_table');
+            processTableRows('#sousseglobal_table');
+          
+            var maxSum = 0;
+            var maxDate = null;
+          
+            Object.keys(sums).forEach(function(date) {
+              if (sums[date] > maxSum) {
+                maxSum = sums[date];
+                maxDate = date;
+              }
+            });
+          
+            return maxSum;
+          }
+  
+  
+      
+          $('#downloadCsvBtglobal').click(function(e) {
+            e.preventDefault();
+            var csvContent = "data:text/csv;charset=utf-8,";
+        
+            // Collect titles from headers
+            var titles = [];
+            $('#global_table thead th').each(function() {
+                var title = $(this).attr('title');
+                if (typeof title !== 'undefined' && title !== '') {
+                    titles.push(title);
+                }
+            });
+        
+            // Collect data rows
+            var rows = [];
+            $('#global_table tbody tr').each(function() {
+                var rowData = [];
+                $(this).find('td').each(function(index) {
+                    rowData.push($(this).text().trim());
+                });
+                rows.push(rowData);
+            });
+        
+            // Combine titles with data rows into CSV rows
+            var csvRows = [];
+            for (var i = 0; i < titles.length; i++) {
+                var title = titles[i];
+                var value = rows[0][i]; // Assume the first row contains the data
+                csvRows.push(title + "," + value); // Format as "title,value"
+            }
+        
+            csvContent += csvRows.join("\r\n");
+        
+            // Download CSV
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "table_data.csv");
+            document.body.appendChild(link);
+            link.click();
+        });
+       //charts
+        function getMonthName(index) {
+          var months = [
+              "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+              "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+          ];
+          return months[index];
+        }
+    
+        function getLast7Months() {
+          var today = new Date();
+          var months = [];
+          for (var i = 1; i < 7; i++) {
+              var month = new Date(today.getFullYear(), today.getMonth() - i, 1);
+              months.push(month);
+          }
+          return months;
+        }
+    
+        function getLast7MonthsLabels() {
+          return getLast7Months().map(function(month) {
+              return getMonthName(month.getMonth());
+          }).reverse();
+        }
+        
+        function calculateMonthlyAveragesForLast7Months() {
+          const last7Months = getLast7Months();
+          const monthlyAverages = [];
+      
+          last7Months.forEach((month) => {
+              const tn1Max = calculateMaxMoyByMonth('#tn1_table', 2, month.getMonth()) || 0;
+              const tn2Max = calculateMaxMoyByMonth('#tn2_table', 2, month.getMonth()) || 0;
+              const sousseMax = calculateMaxMoyByMonth('#sousse_table', 2, month.getMonth()) || 0;
+      
+              const average = (tn1Max + tn2Max + sousseMax) / 3;
+              monthlyAverages.push(average);
+          });
+      
+          return monthlyAverages.reverse();
+      }
+      
+      // Utilisation
+      const monthlyAverages = calculateMonthlyAveragesForLast7Months();
+      console.log(monthlyAverages.map(avg => avg.toFixed(2)));
+      
+    
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: getLast7MonthsLabels(),
+            datasets: [{
+              label: 'Attach SR 2G 3G Average',
+              data: calculateMonthlyAveragesForLast7Months(),
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+         });
+  
+      </script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      
+  

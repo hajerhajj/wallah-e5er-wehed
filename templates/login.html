@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Page</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://accounts.google.com/gsi/client"></script>
+<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <style>
+    </style>
+</head>
+<body>
+<form method="post" action="{% url 'login' %}" style="height: 500px; width: 400px; top: 50%; left: 50%;">
+    {% csrf_token %}
+    <h3 class="orange-text">Login Here</h3>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <label for="username" class="orange-text">Username</label>
+    <input type="text" placeholder="Username" id="username" name="username">
+    <label for="password" class="orange-text">Password</label>
+    <input type="password" placeholder="Password" id="password" name="password">
+
+    <button type="submit" class="orange-text">Log In</button>
+    <div class="centered-link">
+	<p><a href="{% url 'change_password' %}">Forgotten your password?</a></p>
+        <a href="{% url 'signup' %}" class="orange-text">Create account</a>
+       
+    </div>
+</form>
+<img src="{% static 'img/orange-tunisie.png' %}" class="logo" style="margin-top: 20px"/>
+
+</body>
+</html>
