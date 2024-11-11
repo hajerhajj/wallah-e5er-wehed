@@ -4,9 +4,12 @@
 <head>
     <title>Signup Page</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://accounts.google.com/gsi/client"></script>
 <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
@@ -38,6 +41,12 @@
             </div>
         </div>
     </form>
-    <img src="{% static 'img/orange-tunisie.png' %}" class="logo" style="margin-top: 10px"/>
+    <div class="header-container" style="display: flex; align-items: center; margin-top: 20px">
+	<img src="{% static 'img/orange-tunisie.png' %}" class="logo" style=""/>
+	<h3 > Dash d'Or</h3>
+    </div>
+    <div class="footer-text orange-text" style="position: absolute; bottom: 10px; right: 10px;">
+       <span style="font-size: 25px; ">©</span>Hajer Hajjaji 2024
+    </div>
 </body>
 </html>

@@ -39,7 +39,7 @@ def HomePage(request):
     
     return response
 
-@login_required
+
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -137,6 +137,12 @@ def readfiletn1_function():
                             )
                         except (ValueError, IndexError) as e:
                             continue
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}")                            
 
     else:
         print(f"Fichier non trouvé dans le répertoire spécifié.")
@@ -186,6 +192,12 @@ def readfiletn2_function():
 
                         except (ValueError, IndexError) as e:
                             continue
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}")                             
 
     else:
         print(f"Fichier non trouvé dans le répertoire spécifié.")
@@ -235,7 +247,12 @@ def readfileso_function():
 
                         except (ValueError, IndexError) as e:
                             continue
-
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
     else:
         print(f"Fichier non trouvé dans le répertoire spécifié.")
 
@@ -271,7 +288,12 @@ def readfileint_function():
 
                         except (ValueError, IndexError) as e:
                             continue
-
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
     else:
         print(f"Fichier non trouvé dans le répertoire spécifié.")
 
@@ -336,7 +358,12 @@ def readfiletn1epg_function():
                         except (ValueError, IndexError) as e:
                             # Handle errors if data format is incorrect
                             continue
-
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
         return HttpResponse(f"Données du fichier importées dans la base PostgreSQL.")
     else:
         return HttpResponse(f"Fichier  non trouvé dans le répertoire spécifié.")
@@ -441,7 +468,12 @@ def readfiletn2epg_function():
                         except (ValueError, IndexError) as e:
                             # Handle errors if data format is incorrect
                             continue
-
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
         return HttpResponse(f"Données du fichier importées dans la base PostgreSQL.")
     else:
         return HttpResponse(f"Fichier  non trouvé dans le répertoire spécifié.")
@@ -514,7 +546,12 @@ def readfilesoepg_function():
                         except (ValueError, IndexError) as e:
                             # Handle errors if data format is incorrect
                             continue
-
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
         return HttpResponse(f"Données du fichier importées dans la base PostgreSQL.")
     else:
         return HttpResponse(f"Fichier  non trouvé dans le répertoire spécifié.")
@@ -609,7 +646,12 @@ def readfiletn2vepg_function():
                         except (ValueError, IndexError) as e:
                             # Handle errors if data format is incorrect
                             continue
-
+ # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
         return HttpResponse(f"Données du fichier importées dans la base PostgreSQL.")
     else:
         return HttpResponse(f"Fichier  non trouvé dans le répertoire spécifié.")
@@ -656,7 +698,12 @@ def readfiletn1apn(request):
                         except (ValueError, IndexError) as e:
                             # Handle errors if data format is incorrect
                             continue
-
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
         return HttpResponse(f"Données du fichier importées dans la base PostgreSQL.")
     else:
         return HttpResponse(f"Fichier  non trouvé dans le répertoire spécifié.")
@@ -690,7 +737,12 @@ def readfilesoapn(request):
                         except (ValueError, IndexError) as e:
                             # Handle errors if data format is incorrect
                             continue
-
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
         return HttpResponse(f"Données du fichier importées dans la base PostgreSQL.")
     else:
         return HttpResponse(f"Fichier  non trouvé dans le répertoire spécifié.")
@@ -729,7 +781,12 @@ def readfiletn2apn(request):
                         except (ValueError, IndexError) as e:
                             # Handle errors if data format is incorrect
                             continue
-
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
         return HttpResponse(f"Données du fichier importées dans la base PostgreSQL.")
     else:
         return HttpResponse(f"Fichier  non trouvé dans le répertoire spécifié.")
@@ -768,7 +825,12 @@ def readfiletn2vepgapn(request):
                         except (ValueError, IndexError) as e:
                             # Handle errors if data format is incorrect
                             continue
-
+	 # Suppression du fichier après traitement
+        try:
+            os.remove(chemin_file)
+            print(f"Fichier {chemin_file} supprimé avec succès.")
+        except OSError as e:
+            print(f"Erreur lors de la suppression du fichier : {e}") 
         return HttpResponse(f"Données du fichier importées dans la base PostgreSQL.")
     else:
         return HttpResponse(f"Fichier  non trouvé dans le répertoire spécifié.")

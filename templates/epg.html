@@ -3,7 +3,7 @@
     
         <div id="tn1epg_table" class="table-section" style="display: none;">
         <button id="downloadBtntn1epg" class="custom-button containerheader">
-        <i class="fas fa-download"></i>&nbsp; Download report
+                   <i class="material-icons">file_download</i>&nbsp; Download report
       </button>
             <table class="table table-bordered table-striped" border="1">
                 <thead>
@@ -55,11 +55,15 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div class="chart-container">
+                <canvas id="tn1_peak_chart"></canvas>
+                <canvas id="tn1_avg_chart"></canvas>
+            </div>
         </div>
         
          <div id="tn2epg_table" class="table-section" style="display: none;">
          <button id="downloadBtntn2epg" class="custom-button containerheader">
-        <i class="fas fa-download"></i>&nbsp; Download report
+                   <i class="material-icons">file_download</i>&nbsp; Download report
       </button>
             <table class="table table-bordered table-striped" border="1">
                 <thead>
@@ -147,11 +151,15 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div class="chart-container">
+                <canvas id="tn2_peak_chart"></canvas>
+                <canvas id="tn2_avg_chart"></canvas>
+            </div>
         </div>
   
         <div id="tn2vepg_table" class="table-section" style="display: none;">
         <button id="downloadBtntn2vepg" class="custom-button containerheader">
-        <i class="fas fa-download"></i>&nbsp; Download report
+                   <i class="material-icons">file_download</i>&nbsp; Download report
       </button>
             <table class="table table-bordered table-striped" border="1">
                 <thead>
@@ -229,11 +237,15 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div class="chart-container">
+                <canvas id="tn2vepg_peak_chart"></canvas>
+                <canvas id="tn2vepg_avg_chart"></canvas>
+            </div>
         </div>
   
         <div id="sousseepg_table" class="table-section" style="display: none;">
         <button id="downloadBtnsoepg" class="custom-button containerheader">
-        <i class="fas fa-download"></i>&nbsp; Download report
+                   <i class="material-icons">file_download</i>&nbsp; Download report
       </button>
                   <table class="table table-bordered table-striped" border="1">
                 <thead>
@@ -287,208 +299,59 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div class="chart-container">
+                <canvas id="sousse_peak_chart"></canvas>
+                <canvas id="sousse_avg_chart"></canvas>
+            </div>
         </div>
     </div>
 
-    <div class="swiper-container" id="tn1epg_chart">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <canvas id="chart1_tn1epg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart2_tn1epg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart3_tn1epg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart4_tn1epg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart5_tn1epg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart6_tn1epg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart7_tn1epg" width="600" height="400" class="chart"></canvas>
-            </div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    
-        <!-- Add Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-
-    <div class="swiper-container" id="tn2vepg_chart">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <canvas id="chart1_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart2_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart3_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart4_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart5_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart6_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart7_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart8_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart9_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart10_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart11_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart12_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart13_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart14_tn2vepg" width="600" height="400" class="chart"></canvas>
-            </div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    
-        <!-- Add Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-
-    <div class="swiper-container" id="sousseepg_chart">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <canvas id="chart1_sousseepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart2_sousseepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart3_sousseepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart4_sousseepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart5_sousseepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart6_sousseepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart7_sousseepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            <div class="swiper-slide">
-                <canvas id="chart8_sousseepg" width="600" height="400" class="chart"></canvas>
-            </div>
-            
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    
-        <!-- Add Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
+  
   </section>
   
   <script>
     $(document).ready(function() {
         $('.table-section').hide();
-        $('.swiper-container').hide();
-        $('#tn2epg_table').show();
+        $('#tn1epg_table').show();
     
-        var swiper1 = new Swiper('#tn1epg_chart', {
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    
-        var swiper2 = new Swiper('#tn2vepg_chart', {
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    
-        var swiper3 = new Swiper('#sousseepg_chart', {
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    
-    
+     
     
     function exportToExcel(tableId) {
-  const table = document.getElementById(tableId);
-  if (!table) {
-    console.error(`Table element with ID '${tableId}' not found.`);
-    return;
-  }
+	  const table = document.getElementById(tableId);
+	  if (!table) {
+	    console.error(`Table element with ID '${tableId}' not found.`);
+	    return;
+	  }
 
-  const rows = table.querySelectorAll('tbody tr');
-  const header = [];
-  table.querySelectorAll('thead th').forEach(th => {
-    header.push(th.textContent.trim());
-  });
+	  const rows = table.querySelectorAll('tbody tr');
+	  const header = [];
+	  table.querySelectorAll('thead th').forEach(th => {
+	    header.push(th.textContent.trim());
+	  });
 
-  const data = [];
-  data.push(header);
+	  const data = [];
+	  data.push(header);
 
-  rows.forEach(row => {
-    if (row.style.display !== 'none') { // Check if the row is visible
-      const rowData = [];
-      row.querySelectorAll('td').forEach(cell => {
-        let cellValue = cell.textContent.trim();
-        if (!isNaN(cellValue)) {
-          cellValue = cellValue.replace('.', ',');
-        }
-        rowData.push(cellValue);
-      });
-      data.push(rowData);
-    }
-  });
+	  rows.forEach(row => {
+	    if (row.style.display !== 'none') { 
+	      const rowData = [];
+	      row.querySelectorAll('td').forEach(cell => {
+		let cellValue = cell.textContent.trim();
+		if (!isNaN(cellValue)) {
+		  cellValue = cellValue.replace('.', ',');
+		}
+		rowData.push(cellValue);
+	      });
+	      data.push(rowData);
+	    }
+	  });
 
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.aoa_to_sheet(data);
-  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+	  const wb = XLSX.utils.book_new();
+	  const ws = XLSX.utils.aoa_to_sheet(data);
+	  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-  XLSX.writeFile(wb, `${tableId}.xlsx`);
-}
+	  XLSX.writeFile(wb, `${tableId}.xlsx`);
+	}
 
     $('#downloadBtntn1epg').click(function(e) {
       e.preventDefault();
@@ -516,199 +379,776 @@
             const day = String(date.getDate()).padStart(2, '0');
             return `${year}.${month}.${day}`;
         }
-        var charts = {};
-        function generateLineChartPerPeriod(chartId, tableId, avgColumnIndex, peakColumnIndex, chartTitle, startDate, endDate) {
-            var ctx = document.getElementById(chartId).getContext('2d');
-            
-            if (charts[chartId]) {
-                charts[chartId].destroy();
-            }
-            
-            var table = $(tableId);
-            var labels = [];
-            var avgData = [];
-            var peakData = [];
         
-            table.find('tbody tr').each(function() {
-                var cells = $(this).find('td');
-                var date = new Date(cells.eq(0).text());
-                if (date >= startDate && date <= endDate) {
-                    labels.push(formatDate(date));
-                    avgData.push(parseFloat(cells.eq(avgColumnIndex).text()));
-                    peakData.push(parseFloat(cells.eq(peakColumnIndex).text()));
-                }
-            });
-        
-            console.log('Labels:', labels);
-            console.log('Average Data:', avgData);
-            console.log('Peak Data:', peakData);
-        
-            if (labels.length === 0) {
-                console.warn('No data available for the selected date range.');
-                return;
-            }
-        
-            var chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Average',
-                            data: avgData,
-                            borderColor: 'blue',
-                            backgroundColor: 'rgba(0, 0, 255, 0.1)',
-                        },
-                        {
-                            label: 'Peak',
-                            data: peakData,
-                            borderColor: 'red',
-                            backgroundColor: 'rgba(255, 0, 0, 0.1)',
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        
-            charts[chartId] = chart;
-        }
-        
-    
-        function initializeCharts(selectedOption, startDate, endDate) {
-            setTimeout(function() {
-                generateLineChartPerPeriod('chart1_' + selectedOption, '#' + selectedOption + '_table', 1, 2, 'Chart 1', startDate, endDate);
-                generateLineChartPerPeriod('chart2_' + selectedOption, '#' + selectedOption + '_table', 3, 4, 'Chart 1', startDate, endDate);
-                generateLineChartPerPeriod('chart3_' + selectedOption, '#' + selectedOption + '_table', 5, 6, 'Chart 1', startDate, endDate);
-                generateLineChartPerPeriod('chart4_' + selectedOption, '#' + selectedOption + '_table', 7, 8, 'Chart 1', startDate, endDate);
-                generateLineChartPerPeriod('chart5_' + selectedOption, '#' + selectedOption + '_table', 9, 10, 'Chart 1', startDate, endDate);
-                generateLineChartPerPeriod('chart6_' + selectedOption, '#' + selectedOption + '_table', 11, 12, 'Chart 1', startDate, endDate);
-                generateLineChartPerPeriod('chart7_' + selectedOption, '#' + selectedOption + '_table', 13, 14, 'Chart 1', startDate, endDate);
+        function getDaysInRange(startDate, endDate) {
+	    const dateArray = [];
+	    const currentDate = new Date(startDate);
 
-                generateLineChartPerPeriod('chart8_' + selectedOption, '#' + selectedOption + '_table', 15, 16, 'Chart 2', startDate, endDate);
-                generateLineChartPerPeriod('chart9_' + selectedOption, '#' + selectedOption + '_table', 17, 18, 'Chart 2', startDate, endDate);
-                generateLineChartPerPeriod('chart10_' + selectedOption, '#' + selectedOption + '_table', 19, 20, 'Chart 2', startDate, endDate);
-                generateLineChartPerPeriod('chart11_' + selectedOption, '#' + selectedOption + '_table', 21, 22, 'Chart 2', startDate, endDate);
-                generateLineChartPerPeriod('chart12_' + selectedOption, '#' + selectedOption + '_table', 23, 24, 'Chart 2', startDate, endDate);
-                generateLineChartPerPeriod('chart13_' + selectedOption, '#' + selectedOption + '_table', 25, 26, 'Chart 2', startDate, endDate);
-                generateLineChartPerPeriod('chart14_' + selectedOption, '#' + selectedOption + '_table', 27, 28, 'Chart 2', startDate, endDate);
+	    while (currentDate <= endDate) {
 
-                // Autres graphiques...
-            }, 100); // Ajustez le délai si nécessaire
-        }
-    
-        $('#goBtn').click(function(e) {
-            e.preventDefault();
-    
-            var selectedOption = $('.custom-select').val();
-            var dateRange = $('#dateRangePicker').val().split(' to ');
-    
-            if (dateRange.length !== 2) {
-                alert("Veuillez sélectionner une plage de dates valide.");
-                return;
-            }
-    
-            var startDate = new Date(dateRange[0]);
-            var endDate = new Date(dateRange[1]);
-    
-            $('.swiper-container').hide(); // Hide all swiper containers
-            $('.table-section').hide(); // Hide all table sections
-            $('#' + selectedOption.toLowerCase() + '_table').show(); // Show the selected table section
-            $('#' + selectedOption.toLowerCase() + '_chart').show(); // Show the selected chart section
+		dateArray.push(new Date(currentDate).toISOString().split('T')[0]); 
 
-            initializeCharts(selectedOption.toLowerCase(), startDate, endDate);
-            logMaxValuesInRange('#' + selectedOption.toLowerCase() + '_table', startDate, endDate);
-        });
-    
-            
-                function logMaxValuesInRange(tableId, startDate, endDate) {
-                    // Remove existing max values row if it exists
-                    $(tableId + ' tbody tr.max-values-row').remove();
-                
-                    var maxValues = [];
-                    var headers = $(tableId + ' th');
-                    var numColumns = headers.length;
-                
-                    for (var i = 0; i < numColumns; i++) {
-                        maxValues[i] = -Infinity;
-                    }
-                
-                    // Iterate through each row to find max values within date range
-                    $(tableId + ' tbody tr').each(function() {
-                        var dateText = $(this).find('td:first-child').text().trim();
-                        var rowDate = new Date(dateText.replace(/\./g, '-'));
-                
-                        if (rowDate >= startDate && rowDate <= endDate) {
-                            $(this).find('td').each(function(index) {
-                                var value = parseFloat($(this).text().replace(',', '.'));
-                                if (!isNaN(value)) {
-                                    if (value > maxValues[index]) {
-                                        maxValues[index] = value;
-                                    }
-                                }
-                            });
-                        }
-                    });
-                
-                    // Add a row to the table with the max values
-                    var maxValuesRow = '<tr class="max-values-row">';
-                    maxValuesRow += '<td>Maximum</td>'; // Add "result" in the first column
-                    for (var i = 1; i < maxValues.length; i++) {
-                        maxValuesRow += '<td>' + (isFinite(maxValues[i]) ? maxValues[i] : 'N/A') + '</td>';
-                    }
-                    maxValuesRow += '</tr>';
-                
-                    // Append the max values row to the table body
-                    $(tableId + ' tbody').append(maxValuesRow);
-                }
-                
-        
-            
-            
-                var months = [];
-                var currentDate = new Date();
-                var currentMonth = currentDate.getMonth();
-                var currentYear = currentDate.getFullYear();
-            
-                for (var i = 5; i >= 0; i--) {
-                    var pastMonth = new Date(currentYear, currentMonth - i, 1);
-                    months.push(pastMonth.toLocaleString('default', { month: 'long' }));
-                }
+		currentDate.setDate(currentDate.getDate() + 1);
+	    }
+	    
+	    return dateArray;
+	}
+	
+	
+	
+	function extractAverageCPU(datesArray) {
+	    const averageCPUData = [];
+	    const rows = document.querySelectorAll('#tn1epg_table tbody tr');
+	    rows.forEach(row => {
+		const dateCell = row.cells[0].textContent; 
+		if (datesArray.includes(dateCell)) {
+		    const rowData = [];
+		    for (let i = 1; i < 14; i += 2) {
+		        rowData.push(row.cells[i].textContent);
+		    }
+		    averageCPUData.push(rowData);
+		}
+	    });
+	    const transposedData = [];
+	    const maxLength = averageCPUData.length;
+	    for (let i = 0; i < Math.max(...averageCPUData.map(r => r.length)); i++) {
+		const colData = [];
+		for (let j = 0; j < maxLength; j++) {
+		    if (averageCPUData[j][i] !== undefined) {
+		        colData.push(averageCPUData[j][i]);
+		    }
+		}
+		transposedData.push(colData);
+	    }
 
-            
-                function updateLineChart(tableId) {
-                    var labels = [];
-                    var avgData = [];
-                    var peakData = [];
-                    
-                    $(tableId + ' tbody tr').each(function() {
-                        var dateText = $(this).find('td:first-child').text().trim();
-                        var date = new Date(dateText.replace(/\./g, '-'));
-                        var avgValue = parseFloat($(this).find('td:nth-child(2)').text().replace(',', '.'));
-                        var peakValue = parseFloat($(this).find('td:nth-child(3)').text().replace(',', '.'));
-            
-                        if (!isNaN(avgValue) && !isNaN(peakValue)) {
-                            labels.push(dateText);
-                            avgData.push(avgValue);
-                            peakData.push(peakValue);
-                        }
-                    });
-            
-                    
-                }
+	    return transposedData;
+	}
+	
+	function extractPeakCPU(datesArray) {
+	    const peakCPUData = [];
+	    const rows = document.querySelectorAll('#tn1epg_table tbody tr');
+	    rows.forEach(row => {
+		const dateCell = row.cells[0].textContent; 
+		if (datesArray.includes(dateCell)) {
+		    const rowData = [];
+		    for (let i = 2; i < 16; i += 2) { 
+		        rowData.push(row.cells[i].textContent);
+		    }
+		    peakCPUData.push(rowData);
+		}
+	    });
+	    const transposedData = [];
+	    const maxLength = peakCPUData.length;
+	    for (let i = 0; i < Math.max(...peakCPUData.map(r => r.length)); i++) {
+		const colData = [];
+		for (let j = 0; j < maxLength; j++) {
+		    if (peakCPUData[j][i] !== undefined) {
+		        colData.push(peakCPUData[j][i]);
+		    }
+		}
+		transposedData.push(colData);
+	    }
+	    return transposedData;
+	}
+	
+	function extractAverageCPUTN2(datesArray) {
+	    const averageCPUData = [];
+	    const rows = document.querySelectorAll('#tn2epg_table tbody tr');
+	    rows.forEach(row => {
+		const dateCell = row.cells[0].textContent; 
+		if (datesArray.includes(dateCell)) {
+		    const rowData = [];
+		    for (let i = 1; i < 32; i += 2) {
+		        rowData.push(row.cells[i].textContent);
+		    }
+		    averageCPUData.push(rowData);
+		}
+	    });
+	    const transposedData = [];
+	    const maxLength = averageCPUData.length;
+	    for (let i = 0; i < Math.max(...averageCPUData.map(r => r.length)); i++) {
+		const colData = [];
+		for (let j = 0; j < maxLength; j++) {
+		    if (averageCPUData[j][i] !== undefined) {
+		        colData.push(averageCPUData[j][i]);
+		    }
+		}
+		transposedData.push(colData);
+	    }
+
+	    return transposedData;
+	}
+	
+	function extractPeakCPUTN2(datesArray) {
+	    const peakCPUData = [];
+	    const rows = document.querySelectorAll('#tn2epg_table tbody tr');
+	    rows.forEach(row => {
+		const dateCell = row.cells[0].textContent; 
+		if (datesArray.includes(dateCell)) {
+		    const rowData = [];
+		    for (let i = 2; i < 32; i += 2) { 
+		        rowData.push(row.cells[i].textContent);
+		    }
+		    peakCPUData.push(rowData);
+		}
+	    });
+	    const transposedData = [];
+	    const maxLength = peakCPUData.length;
+	    for (let i = 0; i < Math.max(...peakCPUData.map(r => r.length)); i++) {
+		const colData = [];
+		for (let j = 0; j < maxLength; j++) {
+		    if (peakCPUData[j][i] !== undefined) {
+		        colData.push(peakCPUData[j][i]);
+		    }
+		}
+		transposedData.push(colData);
+	    }
+	    return transposedData;
+	}
+	
+	function extractAverageCPUTN2vepg(datesArray) {
+	    const averageCPUData = [];
+	    const rows = document.querySelectorAll('#tn2vepg_table tbody tr');
+	    rows.forEach(row => {
+		const dateCell = row.cells[0].textContent; 
+		if (datesArray.includes(dateCell)) {
+		    const rowData = [];
+		    for (let i = 1; i < 28; i += 2) {
+		        rowData.push(row.cells[i].textContent);
+		    }
+		    averageCPUData.push(rowData);
+		}
+	    });
+	    const transposedData = [];
+	    const maxLength = averageCPUData.length;
+	    for (let i = 0; i < Math.max(...averageCPUData.map(r => r.length)); i++) {
+		const colData = [];
+		for (let j = 0; j < maxLength; j++) {
+		    if (averageCPUData[j][i] !== undefined) {
+		        colData.push(averageCPUData[j][i]);
+		    }
+		}
+		transposedData.push(colData);
+	    }
+
+	    return transposedData;
+	}
+	
+	function extractPeakCPUTN2vepg(datesArray) {
+	    const peakCPUData = [];
+	    const rows = document.querySelectorAll('#tn2vepg_table tbody tr');
+	    rows.forEach(row => {
+		const dateCell = row.cells[0].textContent; 
+		if (datesArray.includes(dateCell)) {
+		    const rowData = [];
+		    for (let i = 2; i < 28; i += 2) { 
+		        rowData.push(row.cells[i].textContent);
+		    }
+		    peakCPUData.push(rowData);
+		}
+	    });
+	    const transposedData = [];
+	    const maxLength = peakCPUData.length;
+	    for (let i = 0; i < Math.max(...peakCPUData.map(r => r.length)); i++) {
+		const colData = [];
+		for (let j = 0; j < maxLength; j++) {
+		    if (peakCPUData[j][i] !== undefined) {
+		        colData.push(peakCPUData[j][i]);
+		    }
+		}
+		transposedData.push(colData);
+	    }
+	    return transposedData;
+	}
+	
+	function extractAverageCPUsousse(datesArray) {
+	    const averageCPUData = [];
+	    const rows = document.querySelectorAll('#sousseepg_table tbody tr');
+	    rows.forEach(row => {
+		const dateCell = row.cells[0].textContent; 
+		if (datesArray.includes(dateCell)) {
+		    const rowData = [];
+		    for (let i = 1; i < 16; i += 2) {
+		        rowData.push(row.cells[i].textContent);
+		    }
+		    averageCPUData.push(rowData);
+		}
+	    });
+	    const transposedData = [];
+	    const maxLength = averageCPUData.length;
+	    for (let i = 0; i < Math.max(...averageCPUData.map(r => r.length)); i++) {
+		const colData = [];
+		for (let j = 0; j < maxLength; j++) {
+		    if (averageCPUData[j][i] !== undefined) {
+		        colData.push(averageCPUData[j][i]);
+		    }
+		}
+		transposedData.push(colData);
+	    }
+
+	    return transposedData;
+	}
+	
+	function extractPeakCPUsousse(datesArray) {
+	    const peakCPUData = [];
+	    const rows = document.querySelectorAll('#sousseepg_table tbody tr');
+	    rows.forEach(row => {
+		const dateCell = row.cells[0].textContent; 
+		if (datesArray.includes(dateCell)) {
+		    const rowData = [];
+		    for (let i = 2; i < 16; i += 2) { 
+		        rowData.push(row.cells[i].textContent);
+		    }
+		    peakCPUData.push(rowData);
+		}
+	    });
+	    const transposedData = [];
+	    const maxLength = peakCPUData.length;
+	    for (let i = 0; i < Math.max(...peakCPUData.map(r => r.length)); i++) {
+		const colData = [];
+		for (let j = 0; j < maxLength; j++) {
+		    if (peakCPUData[j][i] !== undefined) {
+		        colData.push(peakCPUData[j][i]);
+		    }
+		}
+		transposedData.push(colData);
+	    }
+	    return transposedData;
+	}
+	
+	
+        $('#goBtn-epg').click(function(e) {
+		    e.preventDefault();
+
+		    var selectedOption = $('.custom-select').val();
+		    var dateRange = $('#dateRangePicker-epg').val().split(' to ');
+
+		    if (dateRange.length !== 2) {
+			alert("Veuillez sélectionner une plage de dates valide.");
+			return;
+		    }
+
+		    var startDate = new Date(dateRange[0]);
+		    var endDate = new Date(dateRange[1]);
+		    
+		    const daysInRange = getDaysInRange(new Date(startDate), new Date(endDate));
+		    console.log(daysInRange);
+
+		    $('.swiper-container').hide(); 
+		    $('.table-section').hide(); 
+		    $('#' + selectedOption.toLowerCase() + '_table').show(); 
+
+		    logMaxValuesInRange('#' + selectedOption.toLowerCase() + '_table', startDate, endDate);
+	
+
+		    const peakData = extractPeakCPU(daysInRange); 
+		    const avgData = extractAverageCPU(daysInRange); 
+		    const peakDatatn2 = extractPeakCPUTN2(daysInRange); 
+		    const avgDatatn2 = extractAverageCPUTN2(daysInRange); 
+		    const peakDatatn2vepg = extractPeakCPUTN2vepg(daysInRange); 
+		    const avgDatatn2vepg = extractAverageCPUTN2vepg(daysInRange); 
+		    const peakDatasousse = extractPeakCPUsousse(daysInRange);
+		    const avgDatasousse = extractAverageCPUsousse(daysInRange); 
+			console.log('hello', peakDatatn2);
+		    if (selectedOption.toLowerCase() === 'tn1epg') {
+			const labels = daysInRange; 
+        		afficherChartsTN1(labels, peakData, avgData)
+		    } else if (selectedOption.toLowerCase() === 'tn2epg') {
+		        const labels = daysInRange; 
+			afficherChartsTN2(labels, peakDatatn2, avgDatatn2); 
+		    } else if (selectedOption.toLowerCase() === 'tn2vepg') {
+			const labels = daysInRange; 
+			afficherChartsTN2VEPG(labels, peakDatatn2vepg, avgDatatn2vepg);
+		    } else if (selectedOption.toLowerCase() === 'sousseepg') {
+			const labels = daysInRange; 
+			afficherChartsSOUSSE(labels, peakDatasousse, avgDatasousse);
+		    }
+		});
+
+	function afficherChartsTN1(labels, peakData, avgData) {
+	    var ctxPeak = document.getElementById('tn1_peak_chart').getContext('2d');
+	    var ctxAvg = document.getElementById('tn1_avg_chart').getContext('2d');
+
+
+	    const peakColors = [
+		'rgba(255, 99, 132, 1)',
+		'rgba(54, 162, 235, 1)',
+		'rgba(255, 206, 86, 1)',
+		'rgba(75, 192, 192, 1)',
+		'rgba(153, 102, 255, 1)',
+		'rgba(255, 159, 64, 1)',
+		'rgba(255, 99, 132, 1)'
+	    ];
+
+	    const avgColors = [
+		'rgba(255, 99, 132, 0.5)',
+		'rgba(54, 162, 235, 0.5)',
+		'rgba(255, 206, 86, 0.5)',
+		'rgba(75, 192, 192, 0.5)',
+		'rgba(153, 102, 255, 0.5)',
+		'rgba(255, 159, 64, 0.5)',
+		'rgba(255, 99, 132, 0.5)'
+	    ];
+
+
+	    const peakLabels = [
+		'Peak CPU gc-0/16/1 (%)',
+		'Peak CPU gc-0/4/1 (%)',
+		'Peak CPU gc-0/5/1 (%)',
+		'Peak CPU gc-0/14/1 (%)',
+		'Peak CPU gc-0/15/1 (%)',
+		'Peak CPU gc-0/17/1 (%)',
+		'Peak CPU gc-0/6/1 (%)'
+	    ];
+
+	    const avgLabels = [
+		'Average CPU gc-0/16/1 (%)',
+		'Average CPU gc-0/4/1 (%)',
+		'Average CPU gc-0/5/1 (%)',
+		'Average CPU gc-0/14/1 (%)',
+		'Average CPU gc-0/15/1 (%)',
+		'Average CPU gc-0/17/1 (%)',
+		'Average CPU gc-0/6/1 (%)'
+	    ];
+
+	  
+	    const peakDatasets = peakData.map((data, index) => ({
+		label: peakLabels[index], 
+		data: data,
+		backgroundColor: peakColors[index],
+		borderColor: peakColors[index],
+		borderWidth: 1
+	    }));
+
+	    
+	    const avgDatasets = avgData.map((data, index) => ({
+		label: avgLabels[index], 
+		data: data,
+		backgroundColor: avgColors[index],
+		borderColor: avgColors[index],
+		borderWidth: 1
+	    }));
+
+	    new Chart(ctxPeak, {
+		type: 'line',
+		data: {
+		    labels: labels,
+		    datasets: peakDatasets 
+		},
+		options: {}
+	    });
+
+	    new Chart(ctxAvg, {
+		type: 'line',
+		data: {
+		    labels: labels,
+		    datasets: avgDatasets 
+		},
+		options: {}
+	    });
+	}
+
+
+
+	function afficherChartsTN2(labels, peakDatatn2, avgDatatn2) {
+	    var ctxPeaktn2 = document.getElementById('tn2_peak_chart').getContext('2d');
+	    var ctxAvgtn2 = document.getElementById('tn2_avg_chart').getContext('2d');
+
+
+	    const peakColorstn2 = [
+		    'rgba(255, 99, 132, 1)',
+		    'rgba(54, 162, 235, 1)',
+		    'rgba(255, 206, 86, 1)',
+		    'rgba(75, 192, 192, 1)',
+		    'rgba(153, 102, 255, 1)',
+		    'rgba(255, 159, 64, 1)',
+		    'rgba(255, 99, 132, 1)',
+		    'rgba(201, 203, 207, 1)', 
+		    'rgba(255, 99, 0, 1)',
+		    'rgba(0, 255, 0, 1)',
+		    'rgba(0, 0, 255, 1)',
+		    'rgba(255, 0, 255, 1)',
+		    'rgba(0, 255, 255, 1)',
+		    'rgba(128, 0, 128, 1)',
+		    'rgba(0, 128, 0, 1)',
+		    'rgba(128, 128, 0, 1)',
+		    'rgba(128, 128, 128, 1)'  
+		];
+
+		const avgColorstn2 = [
+		    'rgba(255, 99, 132, 0.5)',
+		    'rgba(54, 162, 235, 0.5)',
+		    'rgba(255, 206, 86, 0.5)',
+		    'rgba(75, 192, 192, 0.5)',
+		    'rgba(153, 102, 255, 0.5)',
+		    'rgba(255, 159, 64, 0.5)',
+		    'rgba(255, 99, 132, 0.5)',
+		    'rgba(201, 203, 207, 0.5)', 
+		    'rgba(255, 99, 0, 0.5)',
+		    'rgba(0, 255, 0, 0.5)',
+		    'rgba(0, 0, 255, 0.5)',
+		    'rgba(255, 0, 255, 0.5)',
+		    'rgba(0, 255, 255, 0.5)',
+		    'rgba(128, 0, 128, 0.5)',
+		    'rgba(0, 128, 0, 0.5)',
+		    'rgba(128, 128, 0, 0.5)',
+		    'rgba(128, 128, 128, 0.5)'  
+		];
+
+
+
+	    const peakLabelstn2 = [
+		    'Peak CPU gc-0/16/1 (%)',
+		    'Peak CPU gc-0/5/1 (%)',
+		    'Peak CPU gc-0/6/1 (%)',
+		    'Peak CPU gc-0/11/1 (%)',
+		    'Peak CPU gc-0/12/1 (%)',
+		    'Peak CPU gc-0/13/1 (%)',
+		    'Peak CPU gc-0/15/1 (%)',
+		    'Peak CPU gc-0/17/1 (%)',
+		    'Peak CPU gc-0/18/1 (%)',
+		    'Peak CPU gc-0/19/1 (%)',
+		    'Peak CPU gc-0/2/1 (%)',
+		    'Peak CPU gc-0/20/1 (%)',
+		    'Peak CPU gc-0/3/1 (%)',
+		    'Peak CPU gc-0/4/1 (%)',
+		    'Peak CPU gc-0/8/1 (%)',
+		    'Peak CPU gc-0/9/1 (%)'
+		];
+
+		const avgLabelstn2 = [
+		    'Average CPU gc-0/16/1 (%)',
+		    'Average CPU gc-0/5/1 (%)',
+		    'Average CPU gc-0/6/1 (%)',
+		    'Average CPU gc-0/11/1 (%)',
+		    'Average CPU gc-0/12/1 (%)',
+		    'Average CPU gc-0/13/1 (%)',
+		    'Average CPU gc-0/15/1 (%)',
+		    'Average CPU gc-0/17/1 (%)',
+		    'Average CPU gc-0/18/1 (%)',
+		    'Average CPU gc-0/19/1 (%)',
+		    'Average CPU gc-0/2/1 (%)',
+		    'Average CPU gc-0/20/1 (%)',
+		    'Average CPU gc-0/3/1 (%)',
+		    'Average CPU gc-0/4/1 (%)',
+		    'Average CPU gc-0/8/1 (%)',
+		    'Average CPU gc-0/9/1 (%)'
+		];
+
+
+	    const peakDatasets = peakDatatn2.map((data, index) => ({
+		label: peakLabelstn2[index], 
+		data: data,
+		backgroundColor: peakColorstn2[index],
+		borderColor: peakColorstn2[index],
+		borderWidth: 1
+	    }));
+
+
+	    const avgDatasets = avgDatatn2.map((data, index) => ({
+		label: avgLabelstn2[index], 
+		data: data,
+		backgroundColor: avgColorstn2[index],
+		borderColor: avgColorstn2[index],
+		borderWidth: 1
+	    }));
+
+	    new Chart(ctxPeaktn2, {
+		type: 'line',
+		data: {
+		    labels: labels,
+		    datasets: peakDatasets 
+		},
+		options: {}
+	    });
+
+	    new Chart(ctxAvgtn2, {
+		type: 'line',
+		data: {
+		    labels: labels,
+		    datasets: avgDatasets 
+		},
+		options: {}
+	    });
+	}
+	
+	
+	
+
+		function afficherChartsTN2VEPG(labels, peakDatatn2vepg, avgDatatn2vepg) {
+	    var ctxPeaktn2vepg = document.getElementById('tn2vepg_peak_chart').getContext('2d');
+	    var ctxAvgtn2vepg = document.getElementById('tn2vepg_avg_chart').getContext('2d');
+
+
+	    const peakColorstn2vepg = [
+		    'rgba(255, 99, 132, 1)',
+		    'rgba(54, 162, 235, 1)',
+		    'rgba(255, 206, 86, 1)',
+		    'rgba(75, 192, 192, 1)',
+		    'rgba(153, 102, 255, 1)',
+		    'rgba(255, 159, 64, 1)',
+		    'rgba(255, 99, 132, 1)',
+		    'rgba(201, 203, 207, 1)',
+		    'rgba(255, 99, 0, 1)',
+		    'rgba(0, 255, 0, 1)',
+		    'rgba(0, 0, 255, 1)',
+		    'rgba(255, 0, 255, 1)',
+		    'rgba(0, 255, 255, 1)',
+		    'rgba(128, 0, 128, 1)',
+		    'rgba(0, 128, 0, 1)',
+		    'rgba(128, 128, 0, 1)',
+		    'rgba(128, 128, 128, 1)' 
+		];
+
+		const avgColorstn2vepg = [
+		    'rgba(255, 99, 132, 0.5)',
+		    'rgba(54, 162, 235, 0.5)',
+		    'rgba(255, 206, 86, 0.5)',
+		    'rgba(75, 192, 192, 0.5)',
+		    'rgba(153, 102, 255, 0.5)',
+		    'rgba(255, 159, 64, 0.5)',
+		    'rgba(255, 99, 132, 0.5)',
+		    'rgba(201, 203, 207, 0.5)',
+		    'rgba(255, 99, 0, 0.5)',
+		    'rgba(0, 255, 0, 0.5)',
+		    'rgba(0, 0, 255, 0.5)',
+		    'rgba(255, 0, 255, 0.5)',
+		    'rgba(0, 255, 255, 0.5)',
+		    'rgba(128, 0, 128, 0.5)',
+		    'rgba(0, 128, 0, 0.5)',
+		    'rgba(128, 128, 0, 0.5)',
+		    'rgba(128, 128, 128, 0.5)'  
+		];
+
+
+
+	    const peakLabelstn2vepg = [
+		    'Peak CPU gc-0/29/1 (%)',
+		    'Peak CPU gc-0/30/1 (%)',
+		    'Peak CPU gc-0/1/1 (%)',
+		    'Peak CPU gc-0/10/1 (%)',
+		    'Peak CPU gc-0/11/1 (%)',
+		    'Peak CPU gc-0/12/1 (%)',
+		    'Peak CPU gc-0/2/1 (%)',
+		    'Peak CPU gc-0/3/1 (%)',
+		    'Peak CPU gc-0/4/1 (%)',
+		    'Peak CPU gc-0/5/1 (%)',
+		    'Peak CPU gc-0/6/1 (%)',
+		    'Peak CPU gc-0/7/1 (%)',
+		    'Peak CPU gc-0/8/1 (%)',
+		    'Peak CPU gc-0/9/1 (%)'
+		];
+
+		const avgLabelstn2vepg = [
+		    'Average CPU gc-0/29/1 (%)',
+		    'Average CPU gc-0/30/1 (%)',
+		    'Average CPU gc-0/1/1 (%)',
+		    'Average CPU gc-0/10/1 (%)',
+		    'Average CPU gc-0/11/1 (%)',
+		    'Average CPU gc-0/12/1 (%)',
+		    'Average CPU gc-0/2/1 (%)',
+		    'Average CPU gc-0/3/1 (%)',
+		    'Average CPU gc-0/4/1 (%)',
+		    'Average CPU gc-0/5/1 (%)',
+		    'Average CPU gc-0/6/1 (%)',
+		    'Average CPU gc-0/7/1 (%)',
+		    'Average CPU gc-0/8/1 (%)',
+		    'Average CPU gc-0/9/1 (%)'
+		];
+
+
+
+	    const peakDatasets = peakDatatn2vepg.map((data, index) => ({
+		label: peakLabelstn2vepg[index], 
+		data: data,
+		backgroundColor: peakColorstn2vepg[index],
+		borderColor: peakColorstn2vepg[index],
+		borderWidth: 1
+	    }));
+
+
+	    const avgDatasets = avgDatatn2vepg.map((data, index) => ({
+		label: avgLabelstn2vepg[index],
+		data: data,
+		backgroundColor: avgColorstn2vepg[index],
+		borderColor: avgColorstn2vepg[index],
+		borderWidth: 1
+	    }));
+
+	    new Chart(ctxPeaktn2vepg, {
+		type: 'line',
+		data: {
+		    labels: labels,
+		    datasets: peakDatasets 
+		},
+		options: {}
+	    });
+
+	    new Chart(ctxAvgtn2vepg, {
+		type: 'line',
+		data: {
+		    labels: labels,
+		    datasets: avgDatasets 
+		},
+		options: {}
+	    });
+	}
+	
+	
+	
+	function afficherChartsSOUSSE(labels, peakDatasousse, avgDatasousse) {
+	    var ctxPeaksousse = document.getElementById('sousse_peak_chart').getContext('2d');
+	    var ctxAvgsousse = document.getElementById('sousse_avg_chart').getContext('2d');
+
+
+	    const peakColorssousse = [
+		    'rgba(255, 99, 132, 1)',
+		    'rgba(54, 162, 235, 1)',
+		    'rgba(255, 206, 86, 1)',
+		    'rgba(75, 192, 192, 1)',
+		    'rgba(153, 102, 255, 1)',
+		    'rgba(255, 159, 64, 1)',
+		    'rgba(255, 99, 132, 1)',
+		    'rgba(201, 203, 207, 1)', 
+		    'rgba(255, 99, 0, 1)',
+		    'rgba(0, 255, 0, 1)',
+		    'rgba(0, 0, 255, 1)',
+		    'rgba(255, 0, 255, 1)',
+		    'rgba(0, 255, 255, 1)',
+		    'rgba(128, 0, 128, 1)',
+		    'rgba(0, 128, 0, 1)',
+		    'rgba(128, 128, 0, 1)',
+		    'rgba(128, 128, 128, 1)'  
+		];
+
+		const avgColorssousse = [
+		    'rgba(255, 99, 132, 0.5)',
+		    'rgba(54, 162, 235, 0.5)',
+		    'rgba(255, 206, 86, 0.5)',
+		    'rgba(75, 192, 192, 0.5)',
+		    'rgba(153, 102, 255, 0.5)',
+		    'rgba(255, 159, 64, 0.5)',
+		    'rgba(255, 99, 132, 0.5)',
+		    'rgba(201, 203, 207, 0.5)', // Ajout de couleurs
+		    'rgba(255, 99, 0, 0.5)',
+		    'rgba(0, 255, 0, 0.5)',
+		    'rgba(0, 0, 255, 0.5)',
+		    'rgba(255, 0, 255, 0.5)',
+		    'rgba(0, 255, 255, 0.5)',
+		    'rgba(128, 0, 128, 0.5)',
+		    'rgba(0, 128, 0, 0.5)',
+		    'rgba(128, 128, 0, 0.5)',
+		    'rgba(128, 128, 128, 0.5)'  // Dernière couleur
+		];
+
+
+	    const peakLabelssousse = [
+		    'Peak CPU gc-0/29/1 (%)',
+		    'Peak CPU gc-0/30/1 (%)',
+		    'Peak CPU gc-0/1/1 (%)',
+		    'Peak CPU gc-0/2/1 (%)',
+		    'Peak CPU gc-0/3/1 (%)',
+		    'Peak CPU gc-0/4/1 (%)',
+		    'Peak CPU gc-0/5/1 (%)',
+		    'Peak CPU gc-0/6/1 (%)'
+		];
+
+		const avgLabelssousse = [
+		    'Average CPU gc-0/29/1 (%)',
+		    'Average CPU gc-0/30/1 (%)',
+		    'Average CPU gc-0/1/1 (%)',
+		    'Average CPU gc-0/2/1 (%)',
+		    'Average CPU gc-0/3/1 (%)',
+		    'Average CPU gc-0/4/1 (%)',
+		    'Average CPU gc-0/5/1 (%)',
+		    'Average CPU gc-0/6/1 (%)'
+		];
+
+
+
+	    const peakDatasets = peakDatasousse.map((data, index) => ({
+		label: peakLabelssousse[index], // Utiliser le nom de la colonne comme label
+		data: data,
+		backgroundColor: peakColorssousse[index],
+		borderColor: peakColorssousse[index],
+		borderWidth: 1
+	    }));
+
+
+	    const avgDatasets = avgDatasousse.map((data, index) => ({
+		label: avgLabelssousse[index], // Utiliser le nom de la colonne comme label
+		data: data,
+		backgroundColor: avgColorssousse[index],
+		borderColor: avgColorssousse[index],
+		borderWidth: 1
+	    }));
+
+	    new Chart(ctxPeaksousse, {
+		type: 'line',
+		data: {
+		    labels: labels,
+		    datasets: peakDatasets // Utiliser les datasets préparés pour Peak
+		},
+		options: {}
+	    });
+
+	    new Chart(ctxAvgsousse, {
+		type: 'line',
+		data: {
+		    labels: labels,
+		    datasets: avgDatasets // Utiliser les datasets préparés pour Avg
+		},
+		options: {}
+	    });
+	}
+	
+	
+
+			    
+		function logMaxValuesInRange(tableId, startDate, endDate) {
+
+		    $(tableId + ' tbody tr.max-values-row').remove();
+
+		    var maxValues = [];
+		    var headers = $(tableId + ' th');
+		    var numColumns = headers.length;
+
+		    for (var i = 0; i < numColumns; i++) {
+			maxValues[i] = -Infinity;
+		    }
+
+
+		    $(tableId + ' tbody tr').each(function() {
+			var dateText = $(this).find('td:first-child').text().trim();
+			var rowDate = new Date(dateText.replace(/\./g, '-'));
+
+
+			if (rowDate >= startDate && rowDate <= endDate) {
+			    $(this).show(); 
+			    $(this).find('td').each(function(index) {
+				var value = parseFloat($(this).text().replace(',', '.'));
+				if (!isNaN(value)) {
+				    if (value > maxValues[index]) {
+				        maxValues[index] = value;
+				    }
+				}
+			    });
+			} else {
+			    $(this).hide();
+			}
+		    });
+
+
+		    var maxValuesRow = '<tr class="max-values-row">';
+		    maxValuesRow += '<td>Maximum</td>'; 
+		    for (var i = 1; i < maxValues.length; i++) {
+			maxValuesRow += '<td>' + (isFinite(maxValues[i]) ? maxValues[i] : 'N/A') + '</td>';
+		    }
+		    maxValuesRow += '</tr>';
+
+		    
+		    $(tableId + ' tbody').append(maxValuesRow);
+		}
             });
         </script>
 

@@ -164,3 +164,4 @@ CRONJOBS = [
     ('40 5 1 * * curl http://localhost:8001/lire-fichiersoapn/', 'django_crontab.cron', []),   
     ('50 5 1 * * curl http://localhost:8001/lire-fichiertn2vepgapn/', 'django_crontab.cron', []),       
 ]
+

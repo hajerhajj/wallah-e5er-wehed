@@ -19,11 +19,13 @@ from DashApp import views
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/',views.SignupPage,name='signup'),
     path('', views.LoginPage, name='login'),  # Page de connexion
-    path('password/', views.change_password, name='change_password'),
+    path('change_password/', views.change_password, name='change_password'),
     path('index/',views.HomePage,name='index'),
     path('logout/',views.LogoutPage,name='logout'),  
     path('lire-fichierso/', views.readfileso, name='readfileso'),
@@ -49,3 +51,4 @@ urlpatterns = [
     
 
 ]
+

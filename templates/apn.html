@@ -1,6 +1,10 @@
+{% load static %}
 <section id="apnContainer" class="home-section apn-section">
     <div id="apn" class="container">
         <div id="tn1apn_table" class="table-section" style="display: none;">
+        <button id="downloadTn1Btn" class="custom-button containerheader">
+        <i class="material-icons">file_download</i>&nbsp; Download TN1 Table
+    </button>
             <table class="table table-bordered table-striped" border="1">
                 <thead>
                     <tr>
@@ -8,7 +12,7 @@
                         <th>APN Weborange</th>
                         <th>APN Keypro</th>
                         <th>APN Keygp</th>
-                        <th>APN DATA_LTE_TDD</th>
+                        <th>APN Flyboxgp</th>
                         <th>APN Geoloc</th>
                         <th>APN Keybusiness</th>
                     </tr>
@@ -30,6 +34,9 @@
         </div>
 
         <div id="tn2apn_table" class="table-section" style="display: none;">
+        <button id="downloadTn2Btn" class="custom-button containerheader">
+        <i class="material-icons">file_download</i>&nbsp; Download TN2 Table
+    </button>
             <table class="table table-bordered table-striped" border="1">
                 <thead>
                     <tr>
@@ -56,13 +63,17 @@
             </table>
         </div>
 
-        <div id="soapn_table" class="table-section" style="display: none;">
+        <div id="sousseapn_table" class="table-section" style="display: none;">
+        <button id="downloadSoBtn" class="custom-button containerheader">
+        <i class="material-icons">file_download</i>&nbsp; Download SO Table
+    </button>
             <table class="table table-bordered table-striped" border="1">
                 <thead>
                     <tr>
                         <th>Date</th>
                         <th>APN Weborange</th>
-                        <th>APN Flyboxgp</th>
+                        <th>APN DATA_LTE_TDD</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -78,6 +89,9 @@
         </div>
 
         <div id="tn2vepgapn_table" class="table-section" style="display: none;">
+        <button id="downloadTn2vepgBtn" class="custom-button containerheader">
+        <i class="material-icons">file_download</i>&nbsp; Download TN2 VEPG Table
+    </button>
             <table class="table table-bordered table-striped" border="1">
                 <thead>
                     <tr>
@@ -130,7 +144,7 @@
     </div>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
-
+  <link rel="stylesheet" href="{% static 'css/material-icons.css' %}">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 <script>
@@ -138,92 +152,167 @@
         $('.table-section').hide();
         $('#tn1apn_table').show();
 
-        flatpickr("#dateRangePicker", {
+        flatpickr("#dateRangePicker-apn", {
             mode: "range",
             dateFormat: "Y-m-d",
         });
+        
 
-        $('#goBtn').click(function(e) {
-            e.preventDefault();
+  function calculateAndAddAveragesToTable(tableId, dataByDate) {
+    const table = $(tableId);
+    const tbody = table.find('tbody');
+    const columnNames = table.find('thead th').map((i, th) => $(th).text().trim()).get();
 
-            const selectedOption = $('.custom-select').val();
-            const dateRange = $('#dateRangePicker').val();
+    // Calculate averages
+    const averages = {};
+    const visibleColumnNames = columnNames.slice(1); 
+    visibleColumnNames.forEach(columnName => averages[columnName] = { sum: 0, count: 0 });
 
-            if (!dateRange || !dateRange.includes(' to ')) {
-                alert("Veuillez sélectionner une plage de dates valide.");
-                return;
-            }
+    tbody.find('tr:visible').each(function() {
+        $(this).find('td').each(function(index) {
+            if (index === 0) return; // Skip the date column
 
-            const dates = dateRange.split(' to ');
-            const startDate = new Date(dates[0]);
-            const endDate = new Date(dates[1]);
-            const dataByDate = {};
+            const columnName = columnNames[index];
+            const value = parseFloat($(this).text().trim()) || 0;
 
-            // Cachez et filtrez les lignes en fonction de la plage de dates
-            $('.table-section tbody tr').each(function() {
-                const dateText = $(this).find('td:first-child').text().trim();
-                const formattedDateText = dateText.replace(/\./g, '-');
-                const rowDate = new Date(formattedDateText);
-                const rowDateString = rowDate.toISOString().split('T')[0];
-
-                if (rowDate >= startDate && rowDate <= endDate) {
-                    $(this).show();
-
-                    if (!dataByDate[rowDateString]) {
-                        dataByDate[rowDateString] = {};
-                    }
-
-                    // Bouclez à travers chaque cellule de la ligne (sauf la première)
-                    $(this).find('td').each(function(index) {
-                        if (index === 0) return; // Ignorez la colonne de date
-                        const columnName = $(this).closest('table').find('th').eq(index).text().trim();
-                        const value = parseFloat($(this).text().trim()) || 0;
-
-                        if (!dataByDate[rowDateString][columnName]) {
-                            dataByDate[rowDateString][columnName] = [];
-                        }
-
-                        dataByDate[rowDateString][columnName].push(value);
-                    });
-                } else {
-                    $(this).hide();
-                }
-            });
-
-            // Montrez la table sélectionnée
-            $('.table-section').hide();
-
-            if (selectedOption.toLowerCase() === 'allapn') {
-                calculateAndDisplayAverages(dataByDate);
-            } else {
-                $('#' + selectedOption.toLowerCase() + '_table').show();
+            if (averages[columnName]) {
+                averages[columnName].sum += value;
+                averages[columnName].count += 1;
             }
         });
+    });
+
+
+    tbody.find('tr').each(function() {
+        const firstCellText = $(this).find('td:first-child').text().trim();
+        if (firstCellText === 'Moyenne') {
+            $(this).remove();
+        }
+    });
+
+
+    const averageRow = $('<tr><td><strong>Moyenne</strong></td></tr>');
+    visibleColumnNames.forEach(columnName => {
+        const avg = averages[columnName].count > 0 ? averages[columnName].sum / averages[columnName].count : 0;
+        averageRow.append(`<td>${avg.toFixed(2)}</td>`);
+    });
+    tbody.append(averageRow);
+}
+
+
+
+$('#goBtn-apn').click(function(e) {
+        e.preventDefault();
         
+        const selectedOption = $('.custom-select').val();
+        const dateRange = $('#dateRangePicker-apn').val();
+
+        if (!dateRange || !dateRange.includes(' to ')) {
+            alert("Veuillez sélectionner une plage de dates valide.");
+            return;
+        }
+
+        const dates = dateRange.split(' to ');
+        const startDate = new Date(dates[0]);
+        const endDate = new Date(dates[1]);
+        const dataByDate = {};
+
+
+        $('.table-section tbody tr').each(function() {
+            const dateText = $(this).find('td:first-child').text().trim();
+            const formattedDateText = dateText.replace(/\./g, '-');
+            const rowDate = new Date(formattedDateText);
+            const rowDateString = rowDate.toISOString().split('T')[0];
+
+            if (rowDate >= startDate && rowDate <= endDate) {
+                $(this).show();
+
+                if (!dataByDate[rowDateString]) {
+                    dataByDate[rowDateString] = {};
+                }
+
+                $(this).find('td').each(function(index) {
+                    if (index === 0) return;
+                    const columnName = $(this).closest('table').find('th').eq(index).text().trim();
+                    const value = parseFloat($(this).text().trim()) || 0;
+
+                    if (!dataByDate[rowDateString][columnName]) {
+                        dataByDate[rowDateString][columnName] = [];
+                    }
+
+                    dataByDate[rowDateString][columnName].push(value);
+                });
+            } else {
+                $(this).hide();
+            }
+        });
+
+
+        $('.table-section').hide();
+
+        if (selectedOption.toLowerCase() === 'allapn') {
+            calculateAndDisplayAverages(dataByDate);
+        } else {
+            $('#' + selectedOption.toLowerCase() + '_table').show();
+            calculateAndAddAveragesToTable('#' + selectedOption.toLowerCase() + '_table', dataByDate);
         
-        function sortTableByDate() {
-	    const table = document.querySelector('#allapn_table tbody');
-	    const rows = Array.from(table.querySelectorAll('tr'));
+        }
+        
+    });
 
-	    rows.sort((rowA, rowB) => {
-		const dateA = new Date(rowA.cells[0].textContent);
-		const dateB = new Date(rowB.cells[0].textContent);
-		return dateA - dateB; // Pour trier par ordre croissant
-	    });
+    function sortTableByDate() {
+        const table = document.querySelector('#allapn_table tbody');
+        const rows = Array.from(table.querySelectorAll('tr'));
 
-	    rows.forEach(row => table.appendChild(row)); // Réattache les lignes triées
-	}
+        rows.sort((rowA, rowB) => {
+            const dateA = new Date(rowA.cells[0].textContent);
+            const dateB = new Date(rowB.cells[0].textContent);
+            return dateA - dateB; // Pour trier par ordre croissant
+        });
 
-        function calculateAndDisplayAverages(dataByDate) {
-    const allapnTableBody = $('#allapn_table_body');
-    allapnTableBody.empty(); // Effacez les données précédentes
+        rows.forEach(row => table.appendChild(row)); 
+    }
 
-    const columnSums = {};
-    const columnCounts = {};
+    function calculateAndDisplayAverages(dataByDate) {
+        const allapnTableBody = $('#allapn_table_body');
+        allapnTableBody.empty(); 
 
-    for (const date in dataByDate) {
-        const row = $('<tr></tr>');
-        row.append(`<td>${date}</td>`);
+        const columnSums = {};
+        const columnCounts = {};
+
+        for (const date in dataByDate) {
+            const row = $('<tr></tr>');
+            row.append(`<td>${date}</td>`);
+
+            const columnOrder = [
+                'APN Weborange', 'APN Keygp', 'APN DATA_LTE_TDD', 
+                'APN Geoloc', 'APN Keybusiness', 'APN Keypro', 'APN Flyboxgp', 'APN Flyboxpro'
+            ];
+
+            for (const column of columnOrder) {
+                if (dataByDate[date][column]) {
+                    const values = dataByDate[date][column];
+                    const sum = values.reduce((a, b) => a + b, 0);
+                    const avg = sum / values.length;
+                    row.append(`<td>${avg.toFixed(2)}</td>`);
+
+                    if (!columnSums[column]) {
+                        columnSums[column] = 0;
+                        columnCounts[column] = 0;
+                    }
+                    columnSums[column] += sum;
+                    columnCounts[column] += values.length;
+                } else {
+                    row.append(`<td>-</td>`);
+                }
+            }
+
+            allapnTableBody.append(row);
+        }
+
+
+        const avgRow = $('<tr></tr>');
+        avgRow.append(`<td>Moyenne</td>`);
 
         const columnOrder = [
             'APN Weborange', 'APN Keygp', 'APN DATA_LTE_TDD', 
@@ -231,115 +320,84 @@
         ];
 
         for (const column of columnOrder) {
-            if (dataByDate[date][column]) {
-                const values = dataByDate[date][column];
-                const sum = values.reduce((a, b) => a + b, 0);
-                const avg = sum / values.length;
-                row.append(`<td>${avg.toFixed(2)}</td>`);
-
-                if (!columnSums[column]) {
-                    columnSums[column] = 0;
-                    columnCounts[column] = 0;
-                }
-                columnSums[column] += sum;
-                columnCounts[column] += values.length;
+            if (columnSums[column]) {
+                const avg = columnSums[column] / columnCounts[column];
+                avgRow.append(`<td>${avg.toFixed(2)}</td>`);
             } else {
-                row.append(`<td>-</td>`);
+                avgRow.append(`<td>-</td>`);
             }
         }
 
-        allapnTableBody.append(row);
+        allapnTableBody.append(avgRow);
+
+
+        sortTableByDate();
+
+        $('#allapn_table').show();
+    }
+function exportTableToExcel(tableId, fileName) {
+    const table = document.getElementById(tableId);
+    if (!table) {
+        console.error(`Table element with ID '${tableId}' not found.`);
+        return;
     }
 
-    // Ajouter une ligne de moyenne
-    const avgRow = $('<tr></tr>');
-    avgRow.append(`<td>Moyenne</td>`);
+    const rows = table.querySelectorAll('tbody tr');
+    const header = [];
+    $(`#${tableId} thead th`).each(function() {
+        header.push($(this).text().trim());
+    });
 
-    const columnOrder = [
-        'APN Weborange', 'APN Keygp', 'APN DATA_LTE_TDD', 
-        'APN Geoloc', 'APN Keybusiness', 'APN Keypro', 'APN Flyboxgp', 'APN Flyboxpro'
-    ];
+    const data = [];
+    data.push(header);
 
-    for (const column of columnOrder) {
-        if (columnSums[column]) {
-            const avg = columnSums[column] / columnCounts[column];
-            avgRow.append(`<td>${avg.toFixed(2)}</td>`);
-        } else {
-            avgRow.append(`<td>-</td>`);
+    rows.forEach(row => {
+        if ($(row).is(':visible')) { 
+            const rowData = [];
+            row.querySelectorAll('td').forEach(cell => {
+                let cellValue = cell.textContent.trim();
+                if (!isNaN(cellValue.replace(',', '.'))) {
+                    cellValue = cellValue.replace(',', '.');
+                }
+                rowData.push(cellValue);
+            });
+            data.push(rowData);
         }
-    }
+    });
 
-    allapnTableBody.append(avgRow);
+    const worksheet = XLSX.utils.aoa_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
 
-    // Appelez la fonction de tri après l'ajout des données
-    sortTableByDate();
-
-    $('#allapn_table').show();
+    XLSX.writeFile(workbook, `${fileName}.xlsx`);
 }
 
-function exportToExcel() {
-  const table = document.getElementById('allapn_table');
-  if (!table) {
-    console.error("Table element with ID 'allapn_table' not found.");
-    return;
-  }
 
-  const rows = table.querySelectorAll('tbody tr');
-  const header = [];
-  $('#allapn_table thead th').each(function() {
-    header.push($(this).text().trim());
-  });
-
-  const data = [];
-  data.push(header);
-
-  rows.forEach(row => {
-    if ($(row).is(':visible')) { // Check if the row is visible
-      const rowData = [];
-      row.querySelectorAll('td').forEach(cell => {
-        let cellValue = cell.textContent.trim();
-        if (!isNaN(cellValue.replace(',', '.'))) {
-          cellValue = cellValue.replace(',', '.');
-        }
-        rowData.push(cellValue);
-      });
-      data.push(rowData);
-    }
-  });
-
-  // Get selected date range
-  const dateRange = $('#dateRangePicker').val();
-  const dates = dateRange.split(' to ');
-  const startDate = new Date(dates[0]);
-  const endDate = new Date(dates[1]);
-
-  // Format month names
-  const monthNames = [
-    "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
-    "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
-  ];
-  const startMonthName = monthNames[startDate.getMonth()];
-  const endMonthName = monthNames[endDate.getMonth()];
-
-  // Determine file name based on month range
-  let fileName;
-  if (startDate.getMonth() === endDate.getMonth()) {
-    fileName = `allapn_table_${startMonthName}.xlsx`;
-  } else {
-    fileName = `allapn_table_${startMonthName}_${endMonthName}.xlsx`;
-  }
-
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.aoa_to_sheet(data);
-  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-  XLSX.writeFile(wb, fileName);
-}
-
-$('#downloadBtnapn').click(function(e) {
-  e.preventDefault();
-  exportToExcel();
+document.getElementById('downloadTn1Btn').addEventListener('click', function() {
+    exportTableToExcel('tn1apn_table', 'tn1_apn_report');
 });
+
+
+document.getElementById('downloadTn2Btn').addEventListener('click', function() {
+    exportTableToExcel('tn2apn_table', 'tn2_apn_report');
+});
+
+
+document.getElementById('downloadSoBtn').addEventListener('click', function() {
+    exportTableToExcel('sousseapn_table', 'so_apn_report');
+});
+
+
+document.getElementById('downloadBtnapn').addEventListener('click', function() {
+    exportTableToExcel('allapn_table', 'all_apn_report');
+});
+
+
+document.getElementById('downloadTn2vepgBtn').addEventListener('click', function() {
+    exportTableToExcel('tn2vepgapn_table', 'tn2vepg_apn_report');
+});
+
+
 
     });
 </script>

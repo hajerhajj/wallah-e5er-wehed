@@ -104,15 +104,15 @@
           $('#tn1global_table').show();
         });
     
-        flatpickr("#dateRangePicker", {
+        flatpickr("#dateRangePicker-global", {
           mode: "range",
           dateFormat: "Y-m-d",
         });
     
-        $('#goBtn').click(function(e) {
+        $('#goBtn-global').click(function(e) {
           e.preventDefault();
           var selectedOption = $('.custom-select').val();
-          var dateRange = $('#dateRangePicker').val().split(' to ');
+          var dateRange = $('#dateRangePicker-global').val().split(' to ');
     
           if (dateRange.length !== 2) {
             alert("Veuillez sélectionner une plage de dates valide.");
